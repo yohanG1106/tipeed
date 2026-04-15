@@ -1,0 +1,12 @@
+@"
+.git
+.gitignore
+*.zip
+*.sql
+node_modules
+vendor
+java
+TRASH
+*.md
+*.log
+"@ | Out-File -FilePath ".dockerignore" -Encoding utf8
