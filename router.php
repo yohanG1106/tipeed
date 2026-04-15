@@ -2,7 +2,7 @@
 $uri = urldecode(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
 
 if ($uri === '/') {
-    require __DIR__ . '/index/login.php';
+    require __DIR__ . '/index/auth.php';
     return true;
 }
 
@@ -11,4 +11,4 @@ if (file_exists($file)) {
     return false;
 }
 
-require __DIR__ . '/index/login.php';
+require __DIR__ . '/index/auth.php';
