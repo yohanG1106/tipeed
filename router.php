@@ -1,14 +1,11 @@
 ﻿<?php
-$uri = urldecode(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
-
-if ($uri === '/') {
-    require __DIR__ . '/index/auth.php';
-    return true;
+// Debug: show what files exist
+echo '<pre>';
+echo 'DIR: ' . __DIR__ . '<br>';
+echo 'Files in DIR:<br>';
+foreach(scandir(__DIR__) as $f) echo $f . '<br>';
+echo 'Files in index:<br>';
+if(is_dir(__DIR__ . '/index')) {
+    foreach(scandir(__DIR__ . '/index') as $f) echo $f . '<br>';
 }
-
-$file = __DIR__ . '/index' . $uri;
-if (file_exists($file)) {
-    return false;
-}
-
-require __DIR__ . '/index/auth.php';
+echo '</pre>';
