@@ -1,0 +1,10 @@
+Options -Indexes
+RewriteEngine On
+
+# Redirect root to auth.php (login page)
+RewriteRule ^$ auth.php [L]
+
+# Allow direct access to existing files and directories
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /auth.php [L]

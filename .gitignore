@@ -1,0 +1,18 @@
+# Ignore large uploaded user files (not part of source code)
+index/uploads/*.jpg
+index/uploads/*.jpeg
+index/uploads/*.png
+index/uploads/*.gif
+index/uploads/*.webp
+index/uploads/chat_files/*
+index/uploads/community_files/*
+
+# Keep the upload directories themselves
+!index/uploads/.gitkeep
+!index/uploads/chat_files/.gitkeep
+!index/uploads/community_files/.gitkeep
+
+# Local dev stuff
+.DS_Store
+*.log
+TRASH/
