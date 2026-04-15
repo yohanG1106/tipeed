@@ -1,10 +1,13 @@
 FROM php:8.2-apache
 
+RUN docker-php-ext-install mysqli pdo pdo_mysql
+
 RUN apt-get update && apt-get install -y libpng-dev libjpeg-dev \
-    && docker-php-ext-install mysqli pdo pdo_mysql \
-    && a2enmod rewrite mpm_prefork \
-    && a2dismod mpm_event || true \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+RUN a2dismod mpm_event mpm_worker mpm_prefork 2>/dev/null || true \
+    && a2enmod mpm_prefork \
+    && a2enmod rewrite
 
 WORKDIR /var/www/html
 COPY . /var/www/html/
