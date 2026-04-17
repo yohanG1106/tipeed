@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 include "db_connect.php";
 session_start();        // Start session
 session_unset();        // Remove all session variables
