@@ -609,7 +609,7 @@ else                          { $studentIDT = ucfirst(htmlspecialchars($role)); 
             ?>
             <div class="card-creator">
               <i class="fas fa-chalkboard-user"></i>
-              <?= htmlspecialchars($faculty['first_name'] . ' ' . $faculty['last_name']) ?>
+              <?= htmlspecialchars(($faculty['first_name'] ?? '') . ' ' . ($faculty['last_name'] ?? '')) ?>
             </div>
             <?php endif; ?>
           </div>
