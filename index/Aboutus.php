@@ -1,4 +1,5 @@
 <?php
+include "db_connect.php";
 session_start();
 
 if (!isset($_SESSION['userid'])) {
@@ -14,14 +15,14 @@ $homePage = $currentUserRole === 'admin' ? 'admin_home.php' : ($currentUserRole 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About — TiPeed Forum</title>
+  <title>About â€” TiPeed Forum</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
-    /* ── TOKENS ── */
+    /* â”€â”€ TOKENS â”€â”€ */
     :root {
       --bg:        #f7f6f3;
       --bg-card:   #ffffff;
@@ -78,7 +79,7 @@ $homePage = $currentUserRole === 'admin' ? 'admin_home.php' : ($currentUserRole 
     button { font-family: var(--font); cursor: pointer; }
     input, textarea { font-family: var(--font); }
 
-    /* ── NAVBAR ── */
+    /* â”€â”€ NAVBAR â”€â”€ */
     .navbar {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       height: var(--nav-h); background: var(--bg-card);
@@ -99,10 +100,10 @@ $homePage = $currentUserRole === 'admin' ? 'admin_home.php' : ($currentUserRole 
     .theme-btn { width: 34px; height: 34px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg-input); color: var(--text-2); font-size: 14px; display: flex; align-items: center; justify-content: center; transition: background .15s, color .15s; }
     .theme-btn:hover { background: var(--bg-muted); color: var(--text); }
 
-    /* ── PAGE BODY ── */
+    /* â”€â”€ PAGE BODY â”€â”€ */
     .page-body { padding-top: var(--nav-h); }
 
-    /* ── HERO ── */
+    /* â”€â”€ HERO â”€â”€ */
     .hero-section {
       display: grid; grid-template-columns: 1fr 1fr;
       min-height: calc(100vh - var(--nav-h));
@@ -138,7 +139,7 @@ $homePage = $currentUserRole === 'admin' ? 'admin_home.php' : ($currentUserRole 
     }
     .hero-right:hover img { transform: scale(1.04); }
 
-    /* ── MEANING BAND ── */
+    /* â”€â”€ MEANING BAND â”€â”€ */
     .meaning-band {
       background: var(--accent); color: var(--accent-fg);
       padding: 72px 80px;
@@ -157,7 +158,7 @@ $homePage = $currentUserRole === 'admin' ? 'admin_home.php' : ($currentUserRole 
     .band-p { font-size: 16px; line-height: 1.8; color: rgba(247,246,243,.72); }
     .band-p strong { color: var(--accent-fg); font-weight: 500; }
 
-    /* ── TWO-COL TEXT SECTION ── */
+    /* â”€â”€ TWO-COL TEXT SECTION â”€â”€ */
     .two-col-section {
       display: grid; grid-template-columns: 1fr 1fr;
       border-top: 1px solid var(--border);
@@ -180,7 +181,7 @@ $homePage = $currentUserRole === 'admin' ? 'admin_home.php' : ($currentUserRole 
     .section-p { font-size: 14px; color: var(--text-2); line-height: 1.8; margin-bottom: 14px; }
     .section-p:last-child { margin-bottom: 0; }
 
-    /* ── STATS ── */
+    /* â”€â”€ STATS â”€â”€ */
     .stats-section {
       background: var(--bg-card);
       border-top: 1px solid var(--border);
@@ -207,7 +208,7 @@ $homePage = $currentUserRole === 'admin' ? 'admin_home.php' : ($currentUserRole 
     .stat-cell:nth-child(3).visible .stat-num { transition-delay: .2s; }
     .stat-cell:nth-child(4).visible .stat-num { transition-delay: .3s; }
 
-    /* ── TEAM ── */
+    /* â”€â”€ TEAM â”€â”€ */
     .team-section {
       padding: 80px;
       background: var(--bg);
@@ -263,7 +264,7 @@ $homePage = $currentUserRole === 'admin' ? 'admin_home.php' : ($currentUserRole 
     .member-link:hover { background: var(--bg-muted); color: var(--text-2); border-color: var(--border-2); }
     .member-link i { font-size: 11px; }
 
-    /* ── FOOTER ── */
+    /* â”€â”€ FOOTER â”€â”€ */
     .site-footer {
       background: var(--bg-card);
       border-top: 1px solid var(--border);
@@ -284,7 +285,7 @@ $homePage = $currentUserRole === 'admin' ? 'admin_home.php' : ($currentUserRole 
     .footer-link:hover { background: var(--bg-muted); color: var(--text-2); border-color: var(--border-2); }
     .footer-copy { font-size: 12px; color: var(--text-3); font-family: var(--mono); }
 
-    /* ── CHAT WIDGET ── */
+    /* â”€â”€ CHAT WIDGET â”€â”€ */
     .chat-widget { position: fixed; bottom: 24px; right: 24px; z-index: 200; }
     .chat-fab {
       width: 44px; height: 44px; border-radius: 50%;
@@ -337,19 +338,19 @@ $homePage = $currentUserRole === 'admin' ? 'admin_home.php' : ($currentUserRole 
     .chat-send { width: 32px; height: 32px; background: var(--accent); color: var(--accent-fg); border: none; border-radius: 8px; font-size: 12px; display: flex; align-items: center; justify-content: center; transition: opacity .15s; }
     .chat-send:hover { opacity: .85; }
 
-    /* ── SCROLL ANIMATIONS ── */
+    /* â”€â”€ SCROLL ANIMATIONS â”€â”€ */
     .reveal {
       opacity: 0; transform: translateY(20px);
       transition: opacity .7s ease, transform .7s ease;
     }
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
-    /* ── SCROLLBAR ── */
+    /* â”€â”€ SCROLLBAR â”€â”€ */
     ::-webkit-scrollbar { width: 5px; }
     ::-webkit-scrollbar-track { background: transparent; }
     ::-webkit-scrollbar-thumb { background: var(--border-2); border-radius: 99px; }
 
-    /* ── RESPONSIVE ── */
+    /* â”€â”€ RESPONSIVE â”€â”€ */
     @media (max-width: 960px) {
       .hero-section { grid-template-columns: 1fr; }
       .hero-left { padding: 60px 32px; }
@@ -378,7 +379,7 @@ $homePage = $currentUserRole === 'admin' ? 'admin_home.php' : ($currentUserRole 
 </head>
 <body>
 
-<!-- ── NAVBAR ── -->
+<!-- â”€â”€ NAVBAR â”€â”€ -->
 <nav class="navbar">
   <div class="nav-logo">Ti<span>Peed</span></div>
   <div class="nav-links">
@@ -393,7 +394,7 @@ $homePage = $currentUserRole === 'admin' ? 'admin_home.php' : ($currentUserRole 
   <div class="nav-right">
     <div class="search-wrap">
       <i class="fas fa-search"></i>
-      <input type="text" placeholder="Search threads…">
+      <input type="text" placeholder="Search threadsâ€¦">
     </div>
     <button class="theme-btn" id="themeBtn" title="Toggle dark mode">
       <i class="fas fa-moon"></i>
@@ -403,7 +404,7 @@ $homePage = $currentUserRole === 'admin' ? 'admin_home.php' : ($currentUserRole 
 
 <div class="page-body">
 
-  <!-- ── HERO ── -->
+  <!-- â”€â”€ HERO â”€â”€ -->
   <section class="hero-section">
     <div class="hero-left">
       <div class="hero-eyebrow reveal">TiPeed Forum</div>
@@ -415,21 +416,21 @@ $homePage = $currentUserRole === 'admin' ? 'admin_home.php' : ($currentUserRole 
     </div>
   </section>
 
-  <!-- ── MEANING ── -->
+  <!-- â”€â”€ MEANING â”€â”€ -->
   <section class="meaning-band">
     <div class="meaning-inner">
       <div class="band-label">The name</div>
       <h2 class="band-h2">What does TiPeed mean?</h2>
-      <p class="band-p"><strong>TI</strong> — Technological Institute of the Philippines &nbsp;·&nbsp; <strong>Pee</strong> — Peer-to-Peer &nbsp;·&nbsp; <strong>d</strong> — Discussions.<br><br>The name reflects our mission to facilitate structured peer-to-peer academic conversations within the TIP community — moving fragmented group chats into a purpose-built, organized space.</p>
+      <p class="band-p"><strong>TI</strong> â€” Technological Institute of the Philippines &nbsp;Â·&nbsp; <strong>Pee</strong> â€” Peer-to-Peer &nbsp;Â·&nbsp; <strong>d</strong> â€” Discussions.<br><br>The name reflects our mission to facilitate structured peer-to-peer academic conversations within the TIP community â€” moving fragmented group chats into a purpose-built, organized space.</p>
     </div>
   </section>
 
-  <!-- ── PURPOSE + VISION ── -->
+  <!-- â”€â”€ PURPOSE + VISION â”€â”€ -->
   <div class="two-col-section">
     <div class="two-col-text">
       <div class="section-label reveal">Purpose</div>
       <h2 class="section-h2 reveal">A central hub for course discussions</h2>
-      <p class="section-p reveal">TiPeed is tailored for the academic needs of CCS students — a dedicated space for each course, where students initiate threads, share resources, and learn from one another.</p>
+      <p class="section-p reveal">TiPeed is tailored for the academic needs of CCS students â€” a dedicated space for each course, where students initiate threads, share resources, and learn from one another.</p>
       <p class="section-p reveal">Special attention is given to technical and programming discussions: code sharing, troubleshooting, and subject-specific Q&amp;A are first-class features, not afterthoughts.</p>
     </div>
     <div class="two-col-text">
@@ -440,7 +441,7 @@ $homePage = $currentUserRole === 'admin' ? 'admin_home.php' : ($currentUserRole 
     </div>
   </div>
 
-  <!-- ── STATS ── -->
+  <!-- â”€â”€ STATS â”€â”€ -->
   <div class="stats-section">
     <div class="stat-cell">
       <div class="stat-num">600+</div>
@@ -460,7 +461,7 @@ $homePage = $currentUserRole === 'admin' ? 'admin_home.php' : ($currentUserRole 
     </div>
   </div>
 
-  <!-- ── TEAM ── -->
+  <!-- â”€â”€ TEAM â”€â”€ -->
   <section class="team-section">
     <div class="team-header">
       <div class="team-label">The people</div>
@@ -492,7 +493,7 @@ $homePage = $currentUserRole === 'admin' ? 'admin_home.php' : ($currentUserRole 
         <img src="../assets/Darren.jpg" alt="Darren Penarroyo" class="member-avatar">
         <div class="member-name">Darren Penarroyo</div>
         <div class="member-role">Front-end developer</div>
-        <p class="member-bio">Designs and builds the user interface — translating ideas into clean, accessible, and responsive web experiences.</p>
+        <p class="member-bio">Designs and builds the user interface â€” translating ideas into clean, accessible, and responsive web experiences.</p>
         <a href="https://www.instagram.com/da.pnry__/" class="member-link" target="_blank" rel="noopener">
           <i class="fab fa-instagram"></i> @da.pnry__
         </a>
@@ -501,7 +502,7 @@ $homePage = $currentUserRole === 'admin' ? 'admin_home.php' : ($currentUserRole 
     </div>
   </section>
 
-  <!-- ── FOOTER ── -->
+  <!-- â”€â”€ FOOTER â”€â”€ -->
   <footer class="site-footer">
     <div class="footer-brand">Ti<span>Peed</span></div>
     <div class="footer-links">
@@ -509,12 +510,12 @@ $homePage = $currentUserRole === 'admin' ? 'admin_home.php' : ($currentUserRole 
       <a href="#" class="footer-link" title="Facebook"><i class="fab fa-facebook-f"></i></a>
       <a href="#" class="footer-link" title="Twitter / X"><i class="fab fa-twitter"></i></a>
     </div>
-    <div class="footer-copy">© 2024 TiPeed Forum. All rights reserved.</div>
+    <div class="footer-copy">Â© 2024 TiPeed Forum. All rights reserved.</div>
   </footer>
 
 </div>
 
-<!-- ── CHAT WIDGET ── -->
+<!-- â”€â”€ CHAT WIDGET â”€â”€ -->
 <div class="chat-widget">
   <div class="chat-popup" id="chatPopup">
     <div class="chat-head">
@@ -525,7 +526,7 @@ $homePage = $currentUserRole === 'admin' ? 'admin_home.php' : ($currentUserRole 
       <div class="msg msg-bot">Hi! How can I help you today?</div>
     </div>
     <div class="chat-input-row">
-      <input type="text" id="chatInput" placeholder="Type a message…">
+      <input type="text" id="chatInput" placeholder="Type a messageâ€¦">
       <button class="chat-send" id="chatSend"><i class="fas fa-paper-plane"></i></button>
     </div>
   </div>
@@ -535,7 +536,7 @@ $homePage = $currentUserRole === 'admin' ? 'admin_home.php' : ($currentUserRole 
 </div>
 
 <script>
-  /* ── THEME ── */
+  /* â”€â”€ THEME â”€â”€ */
   const root = document.documentElement;
   const themeBtn = document.getElementById('themeBtn');
   const saved = localStorage.getItem('tipeed-theme') || 'light';
@@ -551,7 +552,7 @@ $homePage = $currentUserRole === 'admin' ? 'admin_home.php' : ($currentUserRole 
     themeBtn.innerHTML = t === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
   }
 
-  /* ── SCROLL REVEAL ── */
+  /* â”€â”€ SCROLL REVEAL â”€â”€ */
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(el => {
       if (el.isIntersecting) { el.target.classList.add('visible'); }
@@ -560,7 +561,7 @@ $homePage = $currentUserRole === 'admin' ? 'admin_home.php' : ($currentUserRole 
 
   document.querySelectorAll('.reveal, .member-card, .stat-cell').forEach(el => observer.observe(el));
 
-  /* ── CHAT ── */
+  /* â”€â”€ CHAT â”€â”€ */
   const chatFab   = document.getElementById('chatFab');
   const chatPopup = document.getElementById('chatPopup');
   const chatClose = document.getElementById('chatClose');
@@ -576,7 +577,7 @@ $homePage = $currentUserRole === 'admin' ? 'admin_home.php' : ($currentUserRole 
     "Thanks for reaching out. Let me look into that.",
     "Great question! I'll find the right information for you.",
     "I'm here to assist. What specifically are you looking for?",
-    "Got it — let me check our resources for you."
+    "Got it â€” let me check our resources for you."
   ];
 
   function sendMsg() {
