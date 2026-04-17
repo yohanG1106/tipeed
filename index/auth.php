@@ -555,7 +555,7 @@ header("Expires: 0");
       btn.textContent = 'Signing in…';
       btn.disabled = true;
 
-      fetch('login.php', { method: 'POST', body: new FormData(this) })
+      fetch('login.php', { method: 'POST', body: new FormData(this), credentials: 'include' })
         .then(res => {
           if (res.redirected) { window.location.href = res.url; return null; }
           return res.text();
