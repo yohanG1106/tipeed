@@ -1,4 +1,5 @@
-<?php
+﻿<?php
+include "db_connect.php";
 session_start();
 
 if (!isset($_SESSION['userid']) || $_SESSION['role'] !== 'admin') {
@@ -16,18 +17,18 @@ $currentUserRole = isset($_SESSION['role']) ? $_SESSION['role'] : '';
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Home — TIPeed</title>
+  <title>Admin Home â€” TIPeed</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
-    /* ─── Reset ─── */
+    /* â”€â”€â”€ Reset â”€â”€â”€ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     a { color: inherit; text-decoration: none; }
     button { font-family: var(--font); cursor: pointer; }
 
-    /* ─── Tokens ─── */
+    /* â”€â”€â”€ Tokens â”€â”€â”€ */
     :root {
       --bg:         #f7f6f3;
       --surface:    #ffffff;
@@ -71,7 +72,7 @@ $currentUserRole = isset($_SESSION['role']) ? $_SESSION['role'] : '';
       --blue-bg:    #0f1624;   --blue-text:  #6da4f4;
     }
 
-    /* ─── Base ─── */
+    /* â”€â”€â”€ Base â”€â”€â”€ */
     body {
       font-family: var(--font);
       background: var(--bg);
@@ -81,7 +82,7 @@ $currentUserRole = isset($_SESSION['role']) ? $_SESSION['role'] : '';
       min-height: 100vh;
     }
 
-    /* ─── Navbar ─── */
+    /* â”€â”€â”€ Navbar â”€â”€â”€ */
     .navbar {
       display: flex;
       align-items: center;
@@ -160,14 +161,14 @@ $currentUserRole = isset($_SESSION['role']) ? $_SESSION['role'] : '';
       border: 1.5px solid var(--surface);
     }
 
-    /* ─── Layout ─── */
+    /* â”€â”€â”€ Layout â”€â”€â”€ */
     .layout {
       display: grid;
       grid-template-columns: 220px 1fr;
       min-height: calc(100vh - 52px);
     }
 
-    /* ─── Sidebar ─── */
+    /* â”€â”€â”€ Sidebar â”€â”€â”€ */
     .sidebar {
       background: var(--surface);
       border-right: 0.5px solid var(--border);
@@ -245,10 +246,10 @@ $currentUserRole = isset($_SESSION['role']) ? $_SESSION['role'] : '';
     .sidebar-bottom a:hover { color: var(--red-text); }
     .sidebar-bottom i { font-size: 12px; }
 
-    /* ─── Main ─── */
+    /* â”€â”€â”€ Main â”€â”€â”€ */
     .main { padding: 24px 28px; overflow-y: auto; }
 
-    /* ─── Top row ─── */
+    /* â”€â”€â”€ Top row â”€â”€â”€ */
     .top-row {
       display: flex;
       align-items: flex-start;
@@ -282,7 +283,7 @@ $currentUserRole = isset($_SESSION['role']) ? $_SESSION['role'] : '';
     }
     .admin-btn.primary:hover { opacity: 0.85; }
 
-    /* ─── Content grid ─── */
+    /* â”€â”€â”€ Content grid â”€â”€â”€ */
     .content-grid {
       display: grid;
       grid-template-columns: 1fr 300px;
@@ -292,7 +293,7 @@ $currentUserRole = isset($_SESSION['role']) ? $_SESSION['role'] : '';
     .left-col { display: flex; flex-direction: column; gap: 16px; }
     .right-col { display: flex; flex-direction: column; gap: 16px; }
 
-    /* ─── Card ─── */
+    /* â”€â”€â”€ Card â”€â”€â”€ */
     .card {
       background: var(--surface);
       border: 0.5px solid var(--border);
@@ -319,7 +320,7 @@ $currentUserRole = isset($_SESSION['role']) ? $_SESSION['role'] : '';
     }
     .card-action:hover { background: var(--tag-bg); color: var(--text); }
 
-    /* ─── Notifications ─── */
+    /* â”€â”€â”€ Notifications â”€â”€â”€ */
     .notif-list { display: flex; flex-direction: column; }
     .notif-item {
       display: flex;
@@ -348,7 +349,7 @@ $currentUserRole = isset($_SESSION['role']) ? $_SESSION['role'] : '';
     .notif-time  { font-size: 10px; color: var(--text3); margin-top: 3px; font-family: var(--mono); }
     .unread-dot  { width: 5px; height: 5px; background: var(--red-text); border-radius: 50%; flex-shrink: 0; margin-top: 6px; }
 
-    /* ─── Announcements ─── */
+    /* â”€â”€â”€ Announcements â”€â”€â”€ */
     .announce-list { display: flex; flex-direction: column; }
     .announce-item {
       display: flex;
@@ -375,7 +376,7 @@ $currentUserRole = isset($_SESSION['role']) ? $_SESSION['role'] : '';
     .ann-body  { font-size: 12px; color: var(--text2); margin-top: 3px; line-height: 1.5; }
     .ann-meta  { font-size: 10px; color: var(--text3); margin-top: 4px; font-family: var(--mono); }
 
-    /* ─── Logs ─── */
+    /* â”€â”€â”€ Logs â”€â”€â”€ */
     .log-list { display: flex; flex-direction: column; }
     .log-item {
       display: grid;
@@ -395,7 +396,7 @@ $currentUserRole = isset($_SESSION['role']) ? $_SESSION['role'] : '';
     .log-text strong { color: var(--text); font-weight: 500; }
     .log-time      { font-size: 10px; color: var(--text3); font-family: var(--mono); white-space: nowrap; }
 
-    /* ─── Calendar ─── */
+    /* â”€â”€â”€ Calendar â”€â”€â”€ */
     .cal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
     .cal-nav { display: flex; gap: 4px; }
     .cal-nav-btn {
@@ -464,7 +465,7 @@ $currentUserRole = isset($_SESSION['role']) ? $_SESSION['role'] : '';
     }
     .cal-day.other-month { color: var(--text3); opacity: 0.4; }
 
-    /* ─── Events ─── */
+    /* â”€â”€â”€ Events â”€â”€â”€ */
     .event-item {
       display: flex;
       gap: 12px;
@@ -476,7 +477,7 @@ $currentUserRole = isset($_SESSION['role']) ? $_SESSION['role'] : '';
     .event-title { font-size: 12px; font-weight: 500; }
     .event-desc  { font-size: 11px; color: var(--text3); margin-top: 1px; }
 
-    /* ─── Modal ─── */
+    /* â”€â”€â”€ Modal â”€â”€â”€ */
     .modal-overlay {
       position: fixed;
       inset: 0;
@@ -534,7 +535,7 @@ $currentUserRole = isset($_SESSION['role']) ? $_SESSION['role'] : '';
     .btn.primary { background: var(--accent-bg); color: var(--accent-fg); border-color: var(--accent-bg); }
     .btn.primary:hover { opacity: 0.85; }
 
-    /* ─── Toast ─── */
+    /* â”€â”€â”€ Toast â”€â”€â”€ */
     .toast {
       position: fixed;
       bottom: 20px;
@@ -554,7 +555,7 @@ $currentUserRole = isset($_SESSION['role']) ? $_SESSION['role'] : '';
     .toast.show { display: flex; }
     .toast i { color: var(--green-text); font-size: 14px; }
 
-    /* ─── Responsive ─── */
+    /* â”€â”€â”€ Responsive â”€â”€â”€ */
     @media (max-width: 900px) {
       .content-grid { grid-template-columns: 1fr; }
       .layout { grid-template-columns: 1fr; }
@@ -564,7 +565,7 @@ $currentUserRole = isset($_SESSION['role']) ? $_SESSION['role'] : '';
 </head>
 <body>
 
-<!-- ═══ NAVBAR ═══ -->
+<!-- â•â•â• NAVBAR â•â•â• -->
 <nav class="navbar">
   <div class="logo">TIPeed</div>
   <div class="nav-links">
@@ -579,7 +580,7 @@ $currentUserRole = isset($_SESSION['role']) ? $_SESSION['role'] : '';
   <div class="nav-right">
     <div class="search">
       <i class="fas fa-search"></i>
-      <input type="text" placeholder="Search topics…">
+      <input type="text" placeholder="Search topicsâ€¦">
     </div>
     <div class="notif-wrap">
       <button class="icon-btn" title="Notifications" onclick="window.location.href='notifications.php'">
@@ -593,7 +594,7 @@ $currentUserRole = isset($_SESSION['role']) ? $_SESSION['role'] : '';
   </div>
 </nav>
 
-<!-- ═══ LAYOUT ═══ -->
+<!-- â•â•â• LAYOUT â•â•â• -->
 <div class="layout">
 
   <!-- SIDEBAR -->
@@ -667,7 +668,7 @@ $currentUserRole = isset($_SESSION['role']) ? $_SESSION['role'] : '';
               <div class="notif-icon red"><i class="fas fa-file-alt"></i></div>
               <div class="notif-body">
                 <div class="notif-title">New Assignment</div>
-                <div class="notif-msg">CIT 201 — Assignment 3 posted</div>
+                <div class="notif-msg">CIT 201 â€” Assignment 3 posted</div>
                 <div class="notif-time">2 hours ago</div>
               </div>
               <div class="unread-dot"></div>
@@ -676,7 +677,7 @@ $currentUserRole = isset($_SESSION['role']) ? $_SESSION['role'] : '';
               <div class="notif-icon amber"><i class="fas fa-bullhorn"></i></div>
               <div class="notif-body">
                 <div class="notif-title">Course Announcement</div>
-                <div class="notif-msg">IT Briefing 2 — Class canceled</div>
+                <div class="notif-msg">IT Briefing 2 â€” Class canceled</div>
                 <div class="notif-time">5 hours ago</div>
               </div>
             </div>
@@ -707,9 +708,9 @@ $currentUserRole = isset($_SESSION['role']) ? $_SESSION['role'] : '';
             <div class="announce-item">
               <span class="ann-type urgent">urgent</span>
               <div>
-                <div class="ann-title">Server Maintenance — Apr 14</div>
+                <div class="ann-title">Server Maintenance â€” Apr 14</div>
                 <div class="ann-body">The TIPeed platform will be offline for scheduled maintenance from 11 PM to 2 AM.</div>
-                <div class="ann-meta">Posted by <?php echo $admin_name; ?> · Apr 10, 2025 · 09:14</div>
+                <div class="ann-meta">Posted by <?php echo $admin_name; ?> Â· Apr 10, 2025 Â· 09:14</div>
               </div>
             </div>
             <div class="announce-item">
@@ -717,7 +718,7 @@ $currentUserRole = isset($_SESSION['role']) ? $_SESSION['role'] : '';
               <div>
                 <div class="ann-title">End-of-Semester Exam Schedule</div>
                 <div class="ann-body">Final examination schedules for all courses are now available on the portal.</div>
-                <div class="ann-meta">Posted by <?php echo $admin_name; ?> · Apr 8, 2025 · 14:30</div>
+                <div class="ann-meta">Posted by <?php echo $admin_name; ?> Â· Apr 8, 2025 Â· 14:30</div>
               </div>
             </div>
             <div class="announce-item">
@@ -725,7 +726,7 @@ $currentUserRole = isset($_SESSION['role']) ? $_SESSION['role'] : '';
               <div>
                 <div class="ann-title">Community Forum now open</div>
                 <div class="ann-body">Students can now post and reply in the new community forum section.</div>
-                <div class="ann-meta">Posted by <?php echo $admin_name; ?> · Apr 5, 2025 · 10:00</div>
+                <div class="ann-meta">Posted by <?php echo $admin_name; ?> Â· Apr 5, 2025 Â· 10:00</div>
               </div>
             </div>
           </div>
@@ -792,7 +793,7 @@ $currentUserRole = isset($_SESSION['role']) ? $_SESSION['role'] : '';
               <div class="event-date">Apr 14</div>
               <div>
                 <div class="event-title">Server Maintenance</div>
-                <div class="event-desc">11 PM – 2 AM downtime window</div>
+                <div class="event-desc">11 PM â€“ 2 AM downtime window</div>
               </div>
             </div>
             <div class="event-item">
@@ -806,7 +807,7 @@ $currentUserRole = isset($_SESSION['role']) ? $_SESSION['role'] : '';
               <div class="event-date">Apr 28</div>
               <div>
                 <div class="event-title">Enrollment Opening</div>
-                <div class="event-desc">AY 2025–2026</div>
+                <div class="event-desc">AY 2025â€“2026</div>
               </div>
             </div>
           </div>
@@ -818,18 +819,18 @@ $currentUserRole = isset($_SESSION['role']) ? $_SESSION['role'] : '';
   </main>
 </div><!-- /.layout -->
 
-<!-- ═══ ANNOUNCEMENT MODAL ═══ -->
+<!-- â•â•â• ANNOUNCEMENT MODAL â•â•â• -->
 <div class="modal-overlay" id="announcementModal">
   <div class="modal">
     <div class="modal-title">Create Announcement</div>
     <div class="modal-sub">Published immediately to all users.</div>
     <div class="form-group">
       <label class="form-label" for="annTitle">Title</label>
-      <input type="text" id="annTitle" class="form-input" placeholder="Announcement title…">
+      <input type="text" id="annTitle" class="form-input" placeholder="Announcement titleâ€¦">
     </div>
     <div class="form-group">
       <label class="form-label" for="annContent">Content</label>
-      <textarea id="annContent" class="form-textarea" placeholder="Write your announcement…"></textarea>
+      <textarea id="annContent" class="form-textarea" placeholder="Write your announcementâ€¦"></textarea>
     </div>
     <div class="form-group">
       <label class="form-label" for="annType">Type</label>
@@ -846,14 +847,14 @@ $currentUserRole = isset($_SESSION['role']) ? $_SESSION['role'] : '';
   </div>
 </div>
 
-<!-- ═══ TOAST ═══ -->
+<!-- â•â•â• TOAST â•â•â• -->
 <div class="toast" id="toast">
   <i class="fas fa-check-circle"></i>
   <span id="toastMsg">Announcement published.</span>
 </div>
 
 <script>
-// ── Dark mode ──
+// â”€â”€ Dark mode â”€â”€
 const darkToggle = document.getElementById('darkToggle');
 const darkIcon   = document.getElementById('darkIcon');
 let dark = localStorage.getItem('tipeed_dark') === '1';
@@ -868,7 +869,7 @@ darkToggle.addEventListener('click', () => {
   applyDark();
 });
 
-// ── Calendar ──
+// â”€â”€ Calendar â”€â”€
 const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 const DAYS   = ['Su','Mo','Tu','We','Th','Fr','Sa'];
 const EVENT_DAYS = { 3: [14, 18, 28] }; // month index: [days with events]
@@ -909,7 +910,7 @@ document.getElementById('nextMonth').addEventListener('click', () => { cur.setMo
 document.getElementById('todayBtn').addEventListener('click', () => { cur = new Date(); cur.setDate(1); buildCal(); });
 buildCal();
 
-// ── Announcement modal ──
+// â”€â”€ Announcement modal â”€â”€
 const modal     = document.getElementById('announcementModal');
 const createBtn = document.getElementById('createAnnouncementBtn');
 const cancelBtn = document.getElementById('cancelAnn');
@@ -938,7 +939,7 @@ submitBtn.addEventListener('click', () => {
   const typeClass = { general: 'general', important: 'important', urgent: 'urgent' };
   const now = new Date();
   const dateStr = now.toLocaleDateString('en-PH', { month: 'short', day: 'numeric', year: 'numeric' })
-    + ' · ' + now.toLocaleTimeString('en-PH', { hour: '2-digit', minute: '2-digit' });
+    + ' Â· ' + now.toLocaleTimeString('en-PH', { hour: '2-digit', minute: '2-digit' });
 
   const list = document.getElementById('announcementsList');
   const item = document.createElement('div');
@@ -948,7 +949,7 @@ submitBtn.addEventListener('click', () => {
     <div>
       <div class="ann-title">${title}</div>
       <div class="ann-body">${content}</div>
-      <div class="ann-meta">Posted by <?php echo addslashes($admin_name); ?> · ${dateStr}</div>
+      <div class="ann-meta">Posted by <?php echo addslashes($admin_name); ?> Â· ${dateStr}</div>
     </div>`;
   list.prepend(item);
 

@@ -1,7 +1,8 @@
-<?php
+﻿<?php
 header("Cache-Control: no-cache, no-store, must-revalidate");
 header("Pragma: no-cache");
 header("Expires: 0");
+include "db_connect.php";
 session_start();
 include 'db_connect.php';
 
@@ -10,7 +11,7 @@ if (!isset($_SESSION['userid'])) {
     exit;
 }
 
-// ── AJAX: send message ──
+// â”€â”€ AJAX: send message â”€â”€
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ajax_message'])) {
     $message     = mysqli_real_escape_string($conn, $_POST['message']);
     $community_id = $_POST['community_id'];
@@ -36,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ajax_message'])) {
     exit;
 }
 
-// ── AJAX: fetch new messages ──
+// â”€â”€ AJAX: fetch new messages â”€â”€
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['ajax_get_messages'], $_GET['last_id'])) {
     $lastId      = $_GET['last_id'];
     $community_id = $_GET['community_id'];
@@ -53,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['ajax_get_messages'], $_
     exit;
 }
 
-// ── Session vars ──
+// â”€â”€ Session vars â”€â”€
 $studentName     = $_SESSION['first_name'] . " " . $_SESSION['last_name'];
 $admin_initials  = strtoupper(substr($_SESSION['first_name'], 0, 1) . substr($_SESSION['last_name'], 0, 1));
 $currentUserRole = isset($_SESSION['role']) ? $_SESSION['role'] : '';
@@ -75,7 +76,7 @@ elseif ($role === 'faculty')  $studentIDT = "Faculty";
 elseif ($role === 'admin')    $studentIDT = "Administrator";
 else                          $studentIDT = ucfirst(htmlspecialchars($role));
 
-// ── Community data ──
+// â”€â”€ Community data â”€â”€
 $community_id = $_GET['community_id'] ?? null;
 $messages     = [];
 $community    = null;
@@ -136,18 +137,18 @@ function autoLinkUrls($text) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Community Chat — TIPeed</title>
+  <title>Community Chat â€” TIPeed</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
-    /* ─── Reset ─── */
+    /* â”€â”€â”€ Reset â”€â”€â”€ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     a { color: inherit; text-decoration: none; }
     button { font-family: var(--font); cursor: pointer; }
 
-    /* ─── Tokens ─── */
+    /* â”€â”€â”€ Tokens â”€â”€â”€ */
     :root {
       --bg:        #f7f6f3;
       --surface:   #ffffff;
@@ -196,7 +197,7 @@ function autoLinkUrls($text) {
       --purple-bg: #1a1230;  --purple-text:#a78bfa;
     }
 
-    /* ─── Base ─── */
+    /* â”€â”€â”€ Base â”€â”€â”€ */
     body {
       font-family: var(--font);
       background: var(--bg);
@@ -207,7 +208,7 @@ function autoLinkUrls($text) {
       overflow: hidden;
     }
 
-    /* ─── Navbar ─── */
+    /* â”€â”€â”€ Navbar â”€â”€â”€ */
     .navbar {
       display: flex; align-items: center; gap: 4px;
       padding: 0 24px; height: 52px;
@@ -243,7 +244,7 @@ function autoLinkUrls($text) {
     }
     .icon-btn:hover { background: var(--tag-bg); color: var(--text); }
 
-    /* ─── Shell ─── */
+    /* â”€â”€â”€ Shell â”€â”€â”€ */
     .shell {
       display: grid;
       grid-template-columns: 220px 1fr;
@@ -251,7 +252,7 @@ function autoLinkUrls($text) {
       overflow: hidden;
     }
 
-    /* ─── Left sidebar (nav) ─── */
+    /* â”€â”€â”€ Left sidebar (nav) â”€â”€â”€ */
     .nav-sidebar {
       background: var(--surface);
       border-right: 0.5px solid var(--border);
@@ -296,7 +297,7 @@ function autoLinkUrls($text) {
     }
     .nav-sidebar-bottom a:hover { color: var(--red-text); }
 
-    /* ─── Chat shell ─── */
+    /* â”€â”€â”€ Chat shell â”€â”€â”€ */
     .chat-shell {
       display: grid;
       grid-template-columns: 260px 1fr;
@@ -304,7 +305,7 @@ function autoLinkUrls($text) {
       overflow: hidden;
     }
 
-    /* ─── Communities sidebar ─── */
+    /* â”€â”€â”€ Communities sidebar â”€â”€â”€ */
     .comm-sidebar {
       border-right: 0.5px solid var(--border);
       background: var(--surface);
@@ -359,7 +360,7 @@ function autoLinkUrls($text) {
       padding: 1px 5px; border-radius: 3px; flex-shrink: 0;
     }
 
-    /* ─── Main chat area ─── */
+    /* â”€â”€â”€ Main chat area â”€â”€â”€ */
     .chat-area {
       display: flex; flex-direction: column;
       overflow: hidden; background: var(--bg);
@@ -380,7 +381,7 @@ function autoLinkUrls($text) {
     }
     .topbar-btn:hover { background: var(--tag-bg); color: var(--text); }
 
-    /* ─── Messages ─── */
+    /* â”€â”€â”€ Messages â”€â”€â”€ */
     .messages-wrap {
       flex: 1; overflow-y: auto; padding: 20px;
       display: flex; flex-direction: column; gap: 12px;
@@ -477,7 +478,7 @@ function autoLinkUrls($text) {
     .empty-chat-title { font-size: 14px; font-weight: 500; color: var(--text2); }
     .empty-chat-sub   { font-size: 12px; color: var(--text3); }
 
-    /* ─── Input area ─── */
+    /* â”€â”€â”€ Input area â”€â”€â”€ */
     .input-area {
       padding: 14px 20px;
       background: var(--surface);
@@ -538,7 +539,7 @@ function autoLinkUrls($text) {
     .send-btn:hover { opacity: 0.85; }
     .send-btn:disabled { background: var(--tag-bg); color: var(--text3); cursor: not-allowed; opacity: 1; }
 
-    /* ─── Image lightbox ─── */
+    /* â”€â”€â”€ Image lightbox â”€â”€â”€ */
     .lightbox {
       position: fixed; inset: 0; background: rgba(0,0,0,0.85);
       z-index: 300; display: none; align-items: center; justify-content: center;
@@ -552,7 +553,7 @@ function autoLinkUrls($text) {
     .lightbox-close:hover { opacity: 1; }
     .lightbox img { max-width: 90vw; max-height: 90vh; border-radius: var(--radius-lg); }
 
-    /* ─── No community selected ─── */
+    /* â”€â”€â”€ No community selected â”€â”€â”€ */
     .no-comm {
       flex: 1; display: flex; flex-direction: column;
       align-items: center; justify-content: center;
@@ -570,7 +571,7 @@ function autoLinkUrls($text) {
 </head>
 <body>
 
-<!-- ═══ NAVBAR ═══ -->
+<!-- â•â•â• NAVBAR â•â•â• -->
 <nav class="navbar">
   <div class="logo">TIPeed</div>
   <div class="nav-links">
@@ -585,7 +586,7 @@ function autoLinkUrls($text) {
   <div class="nav-right">
     <div class="search">
       <i class="fas fa-search"></i>
-      <input type="text" placeholder="Search topics…" id="globalSearch">
+      <input type="text" placeholder="Search topicsâ€¦" id="globalSearch">
     </div>
     <button class="icon-btn" id="darkToggle" title="Toggle dark mode">
       <i class="fas fa-moon" id="darkIcon"></i>
@@ -593,7 +594,7 @@ function autoLinkUrls($text) {
   </div>
 </nav>
 
-<!-- ═══ SHELL ═══ -->
+<!-- â•â•â• SHELL â•â•â• -->
 <div class="shell">
 
   <!-- Nav sidebar -->
@@ -636,11 +637,11 @@ function autoLinkUrls($text) {
     <div class="comm-sidebar">
       <div class="comm-sidebar-head">
         <div class="comm-sidebar-title">Communities</div>
-        <div class="comm-sidebar-sub"><?= $isAdmin ? 'Admin — all groups visible' : 'Your joined groups' ?></div>
+        <div class="comm-sidebar-sub"><?= $isAdmin ? 'Admin â€” all groups visible' : 'Your joined groups' ?></div>
       </div>
       <div class="comm-search">
         <i class="fas fa-search"></i>
-        <input type="text" placeholder="Filter communities…" id="commSearch">
+        <input type="text" placeholder="Filter communitiesâ€¦" id="commSearch">
       </div>
       <div class="comm-section-label"><?= $isAdmin ? 'All Communities' : 'Your Communities' ?></div>
       <div class="comm-list" id="commList">
@@ -690,7 +691,7 @@ function autoLinkUrls($text) {
             <?php endif; ?>
           </div>
           <div class="chat-topbar-meta">
-            <span id="memberCount"><?= $memberCount ?></span> members ·
+            <span id="memberCount"><?= $memberCount ?></span> members Â·
             Last active: <span id="lastActivity"><?= $lastActivity ? date('M j, g:i A', strtotime($lastActivity)) : 'no activity yet' ?></span>
           </div>
         </div>
@@ -768,7 +769,7 @@ function autoLinkUrls($text) {
         <div class="attachment-bar" id="attachBar"></div>
         <div class="input-row">
           <div class="input-box">
-            <textarea class="msg-input" id="msgInput" placeholder="Write a message…" rows="1"></textarea>
+            <textarea class="msg-input" id="msgInput" placeholder="Write a messageâ€¦" rows="1"></textarea>
           </div>
           <label class="attach-btn" title="Attach file">
             <i class="fas fa-paperclip"></i>
@@ -804,7 +805,7 @@ function autoLinkUrls($text) {
 </div>
 
 <script>
-// ── Dark mode ──
+// â”€â”€ Dark mode â”€â”€
 const darkToggle = document.getElementById('darkToggle');
 const darkIcon   = document.getElementById('darkIcon');
 let dark = localStorage.getItem('tipeed_dark') === '1';
@@ -819,7 +820,7 @@ darkToggle.addEventListener('click', () => {
   applyDark();
 });
 
-// ── Community filter ──
+// â”€â”€ Community filter â”€â”€
 document.getElementById('commSearch')?.addEventListener('input', function () {
   const q = this.value.toLowerCase();
   document.querySelectorAll('.comm-item').forEach(el => {
@@ -827,7 +828,7 @@ document.getElementById('commSearch')?.addEventListener('input', function () {
   });
 });
 
-// ── Chat logic ──
+// â”€â”€ Chat logic â”€â”€
 const wrap      = document.getElementById('messagesWrap');
 const msgInput  = document.getElementById('msgInput');
 const fileInput = document.getElementById('fileInput');

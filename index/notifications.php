@@ -1,4 +1,5 @@
-<?php
+﻿<?php
+include "db_connect.php";
 session_start();
 
 // Check if logged in and is admin

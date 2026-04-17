@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // --- AUTO CLEAR BROWSER CACHE ---
 header("Cache-Control: no-cache, no-store, must-revalidate"); 
 header("Pragma: no-cache");

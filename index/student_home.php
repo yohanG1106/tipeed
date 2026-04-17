@@ -1,4 +1,5 @@
-<?php
+﻿<?php
+include "db_connect.php";
 session_start();
 include 'db_connect.php';
 
@@ -46,7 +47,7 @@ $homePage = $currentUserRole === 'admin' ? 'admin_home.php' : ($currentUserRole 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
-    /* ── TOKENS ──────────────────────────────────── */
+    /* â”€â”€ TOKENS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
     :root {
       --bg:        #f7f6f3;
       --bg-card:   #ffffff;
@@ -113,7 +114,7 @@ $homePage = $currentUserRole === 'admin' ? 'admin_home.php' : ($currentUserRole 
     button { font-family: var(--font); cursor: pointer; }
     input, textarea, select { font-family: var(--font); }
 
-    /* ── NAVBAR ──────────────────────────────────── */
+    /* â”€â”€ NAVBAR â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
     .navbar {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       height: var(--nav-h);
@@ -166,14 +167,14 @@ $homePage = $currentUserRole === 'admin' ? 'admin_home.php' : ($currentUserRole 
     }
     .theme-btn:hover { background: var(--bg-muted); color: var(--text); }
 
-    /* ── LAYOUT ──────────────────────────────────── */
+    /* â”€â”€ LAYOUT â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
     .layout {
       display: flex;
       padding-top: var(--nav-h);
       min-height: 100vh;
     }
 
-    /* ── SIDEBAR ─────────────────────────────────── */
+    /* â”€â”€ SIDEBAR â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
     .sidebar {
       width: var(--sidebar-w);
       flex-shrink: 0;
@@ -223,7 +224,7 @@ $homePage = $currentUserRole === 'admin' ? 'admin_home.php' : ($currentUserRole 
 
     .menu-divider { height: 1px; background: var(--border); margin: 8px 4px; }
 
-    /* ── MAIN ────────────────────────────────────── */
+    /* â”€â”€ MAIN â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
     .main {
       flex: 1; min-width: 0;
       max-width: 680px;
@@ -231,7 +232,7 @@ $homePage = $currentUserRole === 'admin' ? 'admin_home.php' : ($currentUserRole 
       padding: 28px 24px 60px;
     }
 
-    /* ── HERO BANNER ─────────────────────────────── */
+    /* â”€â”€ HERO BANNER â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
     .hero {
       background: var(--bg-card);
       border: 1px solid var(--border);
@@ -272,7 +273,7 @@ $homePage = $currentUserRole === 'admin' ? 'admin_home.php' : ($currentUserRole 
       font-size: 14px; color: var(--text-2); line-height: 1.6;
     }
 
-    /* ── COMPOSE BOX ─────────────────────────────── */
+    /* â”€â”€ COMPOSE BOX â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
     .compose-box {
       background: var(--bg-card);
       border: 1px solid var(--border);
@@ -297,7 +298,7 @@ $homePage = $currentUserRole === 'admin' ? 'admin_home.php' : ($currentUserRole 
     }
     .compose-btn:hover { opacity: .85; }
 
-    /* ── SECTION HEADING ─────────────────────────── */
+    /* â”€â”€ SECTION HEADING â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
     .section-heading {
       display: flex; align-items: center; justify-content: space-between;
       margin-bottom: 14px;
@@ -316,7 +317,7 @@ $homePage = $currentUserRole === 'admin' ? 'admin_home.php' : ($currentUserRole 
     .sort-btn:hover { border-color: var(--border); color: var(--text-2); }
     .sort-btn.active { border-color: var(--border-2); color: var(--text); background: var(--bg-muted); }
 
-    /* ── TRENDING STRIP ──────────────────────────── */
+    /* â”€â”€ TRENDING STRIP â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
     .trending-strip {
       display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;
       margin-bottom: 28px;
@@ -350,7 +351,7 @@ $homePage = $currentUserRole === 'admin' ? 'admin_home.php' : ($currentUserRole 
       padding: 2px 7px; border-radius: 5px; margin-bottom: 8px;
     }
 
-    /* ── THREAD CARD ─────────────────────────────── */
+    /* â”€â”€ THREAD CARD â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
     .thread-card {
       background: var(--bg-card);
       border: 1px solid var(--border);
@@ -440,7 +441,7 @@ $homePage = $currentUserRole === 'admin' ? 'admin_home.php' : ($currentUserRole 
     .vote-count { font-family: var(--mono); font-size: 12px; color: var(--text-2); padding: 0 8px; }
     .comment-count { font-size: 11px; color: var(--text-3); font-family: var(--mono); margin-left: auto; }
 
-    /* ── EMPTY STATE ─────────────────────────────── */
+    /* â”€â”€ EMPTY STATE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
     .empty-state {
       text-align: center; padding: 48px 20px;
       border: 1px dashed var(--border-2);
@@ -448,7 +449,7 @@ $homePage = $currentUserRole === 'admin' ? 'admin_home.php' : ($currentUserRole 
     }
     .empty-state p { font-size: 14px; margin-top: 8px; }
 
-    /* ── POPUP / MODAL ───────────────────────────── */
+    /* â”€â”€ POPUP / MODAL â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
     .overlay {
       display: none; position: fixed; inset: 0; z-index: 200;
       background: rgba(0,0,0,.35); backdrop-filter: blur(4px);
@@ -528,12 +529,12 @@ $homePage = $currentUserRole === 'admin' ? 'admin_home.php' : ($currentUserRole 
     .chip-green  { background: var(--green-bg);  color: var(--green); }
     .chip-blue   { background: var(--blue-bg);   color: var(--blue);  }
 
-    /* ── SCROLLBAR ───────────────────────────────── */
+    /* â”€â”€ SCROLLBAR â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
     ::-webkit-scrollbar { width: 5px; }
     ::-webkit-scrollbar-track { background: transparent; }
     ::-webkit-scrollbar-thumb { background: var(--border-2); border-radius: 99px; }
 
-    /* ── ANIMATIONS ──────────────────────────────── */
+    /* â”€â”€ ANIMATIONS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(10px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -543,7 +544,7 @@ $homePage = $currentUserRole === 'admin' ? 'admin_home.php' : ($currentUserRole 
     .thread-card:nth-child(3) { animation-delay: .1s; }
     .thread-card:nth-child(4) { animation-delay: .15s; }
 
-    /* ── RESPONSIVE ──────────────────────────────── */
+    /* â”€â”€ RESPONSIVE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
     @media (max-width: 720px) {
       .sidebar { display: none; }
       .main { padding: 16px 14px 60px; }
@@ -558,7 +559,7 @@ $homePage = $currentUserRole === 'admin' ? 'admin_home.php' : ($currentUserRole 
 </head>
 <body>
 
-<!-- ── NAVBAR ──────────────────────────────────── -->
+<!-- â”€â”€ NAVBAR â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
 <nav class="navbar">
   <div class="nav-logo">Ti<span>Peed</span></div>
   <div class="nav-links">
@@ -573,7 +574,7 @@ $homePage = $currentUserRole === 'admin' ? 'admin_home.php' : ($currentUserRole 
   <div class="nav-right">
     <div class="search-wrap">
       <i class="fas fa-search"></i>
-      <input type="text" placeholder="Search threads…">
+      <input type="text" placeholder="Search threadsâ€¦">
     </div>
     <button class="theme-btn" id="themeBtn" title="Toggle dark mode">
       <i class="fas fa-moon"></i>
@@ -581,7 +582,7 @@ $homePage = $currentUserRole === 'admin' ? 'admin_home.php' : ($currentUserRole 
   </div>
 </nav>
 
-<!-- ── LAYOUT ──────────────────────────────────── -->
+<!-- â”€â”€ LAYOUT â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
 <div class="layout">
 
   <!-- SIDEBAR -->
@@ -623,7 +624,7 @@ $homePage = $currentUserRole === 'admin' ? 'admin_home.php' : ($currentUserRole 
     <div class="hero">
       <div class="hero-eyebrow">TiPeed Forum</div>
       <h1>Welcome, <strong><?= htmlspecialchars($firstName) ?></strong></h1>
-      <p>Join the conversation — ask questions, share ideas, and connect with your campus.</p>
+      <p>Join the conversation â€” ask questions, share ideas, and connect with your campus.</p>
     </div>
 
     <!-- Compose -->
@@ -763,7 +764,7 @@ $homePage = $currentUserRole === 'admin' ? 'admin_home.php' : ($currentUserRole 
     <?php endwhile; else: ?>
     <div class="empty-state">
       <i class="fas fa-pen-to-square" style="font-size:28px;color:var(--text-3)"></i>
-      <p>No threads yet — be the first to post!</p>
+      <p>No threads yet â€” be the first to post!</p>
     </div>
     <?php endif; ?>
     </div>
@@ -771,7 +772,7 @@ $homePage = $currentUserRole === 'admin' ? 'admin_home.php' : ($currentUserRole 
   </main>
 </div><!-- /.layout -->
 
-<!-- ── COMPOSE MODAL ──────────────────────────── -->
+<!-- â”€â”€ COMPOSE MODAL â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
 <div class="overlay" id="composeOverlay">
   <div class="modal">
     <div class="modal-header">
@@ -781,19 +782,19 @@ $homePage = $currentUserRole === 'admin' ? 'admin_home.php' : ($currentUserRole 
     <form action="create_thread.php" method="POST" enctype="multipart/form-data">
       <div class="field-wrap">
         <label class="field-label">Title</label>
-        <input type="text" name="title" class="field-input" placeholder="Give your thread a title…" required>
+        <input type="text" name="title" class="field-input" placeholder="Give your thread a titleâ€¦" required>
       </div>
       <div class="field-wrap">
         <label class="field-label">Content</label>
-        <textarea name="content" class="field-input" placeholder="Share your thoughts…" required></textarea>
+        <textarea name="content" class="field-input" placeholder="Share your thoughtsâ€¦" required></textarea>
       </div>
       <div class="field-wrap">
         <label class="field-label">Image <span style="color:var(--text-3);font-weight:400">(optional)</span></label>
         <label class="file-label">
-          <i class="fas fa-image"></i> Choose image…
+          <i class="fas fa-image"></i> Choose imageâ€¦
           <input type="file" name="image" accept="image/*">
         </label>
-        <div class="file-note">JPG, PNG or GIF · max 5 MB</div>
+        <div class="file-note">JPG, PNG or GIF Â· max 5 MB</div>
       </div>
       <div class="modal-actions">
         <button type="button" class="btn-ghost" id="cancelCompose">Cancel</button>
@@ -803,7 +804,7 @@ $homePage = $currentUserRole === 'admin' ? 'admin_home.php' : ($currentUserRole 
   </div>
 </div>
 
-<!-- ── REPORT MODAL ───────────────────────────── -->
+<!-- â”€â”€ REPORT MODAL â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
 <div class="overlay" id="reportOverlay">
   <div class="modal">
     <div class="modal-header">
@@ -838,7 +839,7 @@ $homePage = $currentUserRole === 'admin' ? 'admin_home.php' : ($currentUserRole 
       <div class="field-wrap">
         <label class="field-label">Description</label>
         <textarea id="reportDescription" name="description" class="field-input"
-          placeholder="Describe the issue…" required></textarea>
+          placeholder="Describe the issueâ€¦" required></textarea>
       </div>
       <div class="modal-actions">
         <button type="button" class="btn-ghost" id="cancelReport">Cancel</button>
@@ -850,7 +851,7 @@ $homePage = $currentUserRole === 'admin' ? 'admin_home.php' : ($currentUserRole 
 
 <script src="../java/script.js" defer></script>
 <script>
-  // ── DARK MODE ──
+  // â”€â”€ DARK MODE â”€â”€
   const root = document.documentElement;
   const themeBtn = document.getElementById('themeBtn');
   const saved = localStorage.getItem('tipeed-theme') || 'light';
@@ -869,14 +870,14 @@ $homePage = $currentUserRole === 'admin' ? 'admin_home.php' : ($currentUserRole 
       : '<i class="fas fa-moon"></i>';
   }
 
-  // ── COMPOSE MODAL ──
+  // â”€â”€ COMPOSE MODAL â”€â”€
   const composeOverlay = document.getElementById('composeOverlay');
   document.getElementById('openCompose').addEventListener('click', () => composeOverlay.classList.add('open'));
   document.getElementById('closeCompose').addEventListener('click', () => composeOverlay.classList.remove('open'));
   document.getElementById('cancelCompose').addEventListener('click', () => composeOverlay.classList.remove('open'));
   composeOverlay.addEventListener('click', e => { if (e.target === composeOverlay) composeOverlay.classList.remove('open'); });
 
-  // ── REPORT MODAL ──
+  // â”€â”€ REPORT MODAL â”€â”€
   const reportOverlay = document.getElementById('reportOverlay');
   document.getElementById('closeReport').addEventListener('click', () => reportOverlay.classList.remove('open'));
   document.getElementById('cancelReport').addEventListener('click', () => reportOverlay.classList.remove('open'));
@@ -892,7 +893,7 @@ $homePage = $currentUserRole === 'admin' ? 'admin_home.php' : ($currentUserRole 
     });
   });
 
-  // ── DROPDOWN MENUS ──
+  // â”€â”€ DROPDOWN MENUS â”€â”€
   document.querySelectorAll('.menu-trigger').forEach(btn => {
     btn.addEventListener('click', e => {
       e.stopPropagation();
@@ -903,7 +904,7 @@ $homePage = $currentUserRole === 'admin' ? 'admin_home.php' : ($currentUserRole 
   });
   document.addEventListener('click', () => document.querySelectorAll('.dropdown.open').forEach(d => d.classList.remove('open')));
 
-  // ── SORT ──
+  // â”€â”€ SORT â”€â”€
   document.querySelectorAll('.sort-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.sort-btn').forEach(b => b.classList.remove('active'));

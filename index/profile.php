@@ -1,5 +1,6 @@
-<?php
+﻿<?php
 require 'db_connect.php';
+include "db_connect.php";
 session_start();
 
 if (!isset($_SESSION['userid'])) {
@@ -92,14 +93,14 @@ $year_levels = ['','1st Year','2nd Year','3rd Year','4th Year','5th Year'];
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Profile — TiPeed Forum</title>
+  <title>Profile â€” TiPeed Forum</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
-    /* ── TOKENS ── */
+    /* â”€â”€ TOKENS â”€â”€ */
     :root {
       --bg:        #f7f6f3;
       --bg-card:   #ffffff;
@@ -155,7 +156,7 @@ $year_levels = ['','1st Year','2nd Year','3rd Year','4th Year','5th Year'];
     button { font-family: var(--font); cursor: pointer; }
     input, textarea, select { font-family: var(--font); }
 
-    /* ── NAVBAR ── */
+    /* â”€â”€ NAVBAR â”€â”€ */
     .navbar {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       height: var(--nav-h); background: var(--bg-card);
@@ -176,10 +177,10 @@ $year_levels = ['','1st Year','2nd Year','3rd Year','4th Year','5th Year'];
     .theme-btn { width: 34px; height: 34px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg-input); color: var(--text-2); font-size: 14px; display: flex; align-items: center; justify-content: center; transition: background .15s, color .15s; }
     .theme-btn:hover { background: var(--bg-muted); color: var(--text); }
 
-    /* ── LAYOUT ── */
+    /* â”€â”€ LAYOUT â”€â”€ */
     .layout { display: flex; padding-top: var(--nav-h); min-height: 100vh; }
 
-    /* ── SIDEBAR ── */
+    /* â”€â”€ SIDEBAR â”€â”€ */
     .sidebar {
       width: var(--sidebar-w); flex-shrink: 0;
       position: sticky; top: var(--nav-h);
@@ -201,7 +202,7 @@ $year_levels = ['','1st Year','2nd Year','3rd Year','4th Year','5th Year'];
     .menu-item:hover i, .menu-item.active i { color: var(--text-2); }
     .menu-divider { height: 1px; background: var(--border); margin: 8px 4px; }
 
-    /* ── MAIN ── */
+    /* â”€â”€ MAIN â”€â”€ */
     .main {
       flex: 1; min-width: 0;
       padding: 28px 28px 80px;
@@ -210,7 +211,7 @@ $year_levels = ['','1st Year','2nd Year','3rd Year','4th Year','5th Year'];
       width: 100%;
     }
 
-    /* ── ALERT ── */
+    /* â”€â”€ ALERT â”€â”€ */
     .alert {
       display: flex; align-items: center; gap: 10px;
       padding: 11px 14px; border-radius: var(--radius);
@@ -220,7 +221,7 @@ $year_levels = ['','1st Year','2nd Year','3rd Year','4th Year','5th Year'];
     .alert-error   { background: var(--red-bg);   color: var(--red);   }
     .alert i { font-size: 13px; }
 
-    /* ── GRID ── */
+    /* â”€â”€ GRID â”€â”€ */
     .profile-grid {
       display: grid;
       grid-template-columns: 260px 1fr;
@@ -228,7 +229,7 @@ $year_levels = ['','1st Year','2nd Year','3rd Year','4th Year','5th Year'];
       align-items: start;
     }
 
-    /* ── CARD ── */
+    /* â”€â”€ CARD â”€â”€ */
     .card {
       background: var(--bg-card);
       border: 1px solid var(--border);
@@ -238,7 +239,7 @@ $year_levels = ['','1st Year','2nd Year','3rd Year','4th Year','5th Year'];
     }
     .card:last-child { margin-bottom: 0; }
 
-    /* ── AVATAR HERO ── */
+    /* â”€â”€ AVATAR HERO â”€â”€ */
     .avatar-hero {
       width: 72px; height: 72px; border-radius: 50%;
       background: var(--bg-muted); border: 1px solid var(--border-2);
@@ -249,13 +250,13 @@ $year_levels = ['','1st Year','2nd Year','3rd Year','4th Year','5th Year'];
     .hero-name { font-size: 17px; font-weight: 500; text-align: center; letter-spacing: -.2px; margin-bottom: 3px; }
     .hero-handle { font-size: 12px; color: var(--text-3); text-align: center; font-family: var(--mono); margin-bottom: 18px; }
 
-    /* ── STATS ROW ── */
+    /* â”€â”€ STATS ROW â”€â”€ */
     .stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border-radius: var(--radius); overflow: hidden; margin-bottom: 16px; }
     .stat-cell { background: var(--bg-card); padding: 12px 8px; text-align: center; }
     .stat-val { font-size: 18px; font-weight: 500; font-family: var(--mono); letter-spacing: -.5px; }
     .stat-lbl { font-size: 11px; color: var(--text-3); margin-top: 2px; }
 
-    /* ── TEMP PASSWORD WARNING ── */
+    /* â”€â”€ TEMP PASSWORD WARNING â”€â”€ */
     .temp-warn {
       display: flex; align-items: center; gap: 8px;
       font-size: 12px; color: var(--amber);
@@ -264,7 +265,7 @@ $year_levels = ['','1st Year','2nd Year','3rd Year','4th Year','5th Year'];
     }
     .temp-warn i { font-size: 11px; }
 
-    /* ── SECTION HEADING ── */
+    /* â”€â”€ SECTION HEADING â”€â”€ */
     .card-header {
       display: flex; align-items: center; justify-content: space-between;
       margin-bottom: 16px; padding-bottom: 12px;
@@ -274,13 +275,13 @@ $year_levels = ['','1st Year','2nd Year','3rd Year','4th Year','5th Year'];
     .link-btn { font-size: 13px; color: var(--text-3); background: none; border: none; transition: color .15s; }
     .link-btn:hover { color: var(--text); }
 
-    /* ── INFO ROWS ── */
+    /* â”€â”€ INFO ROWS â”€â”€ */
     .info-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; padding: 9px 0; border-bottom: 1px solid var(--border); }
     .info-row:last-child { border-bottom: none; }
     .info-label { font-size: 12px; color: var(--text-3); font-family: var(--mono); white-space: nowrap; padding-top: 1px; }
     .info-value { font-size: 13.5px; color: var(--text); text-align: right; word-break: break-all; }
 
-    /* ── THREAD ITEMS ── */
+    /* â”€â”€ THREAD ITEMS â”€â”€ */
     .thread-item {
       display: flex; align-items: flex-start; gap: 10px;
       padding: 10px 0; border-bottom: 1px solid var(--border);
@@ -295,7 +296,7 @@ $year_levels = ['','1st Year','2nd Year','3rd Year','4th Year','5th Year'];
 
     .empty-msg { font-size: 13px; color: var(--text-3); padding: 12px 0; text-align: center; }
 
-    /* ── TABS ── */
+    /* â”€â”€ TABS â”€â”€ */
     .tabs { display: flex; gap: 2px; margin-bottom: 16px; }
     .tab-btn { font-size: 13px; color: var(--text-3); background: none; border: none; padding: 5px 12px; border-radius: 7px; transition: background .15s, color .15s; }
     .tab-btn:hover { background: var(--bg-muted); color: var(--text-2); }
@@ -303,13 +304,13 @@ $year_levels = ['','1st Year','2nd Year','3rd Year','4th Year','5th Year'];
     .tab-panel { display: none; }
     .tab-panel.active { display: block; }
 
-    /* ── BUTTONS ── */
+    /* â”€â”€ BUTTONS â”€â”€ */
     .btn-solid { background: var(--accent); color: var(--accent-fg); border: none; border-radius: 8px; padding: 7px 16px; font-size: 13px; font-weight: 500; transition: opacity .15s; width: 100%; }
     .btn-solid:hover { opacity: .85; }
     .btn-ghost { background: none; border: 1px solid var(--border); border-radius: 8px; padding: 7px 14px; font-size: 13px; color: var(--text-2); transition: background .15s, color .15s; }
     .btn-ghost:hover { background: var(--bg-muted); color: var(--text); }
 
-    /* ── OVERLAY / MODAL ── */
+    /* â”€â”€ OVERLAY / MODAL â”€â”€ */
     .overlay { display: none; position: fixed; inset: 0; z-index: 200; background: rgba(0,0,0,.35); backdrop-filter: blur(4px); align-items: center; justify-content: center; }
     .overlay.open { display: flex; }
     .modal { background: var(--bg-card); border: 1px solid var(--border-2); border-radius: var(--radius-lg); box-shadow: var(--shadow-md); padding: 24px; width: 100%; max-width: 440px; margin: 16px; }
@@ -326,12 +327,12 @@ $year_levels = ['','1st Year','2nd Year','3rd Year','4th Year','5th Year'];
     .modal-btn-solid { background: var(--accent); color: var(--accent-fg); border: none; border-radius: 8px; padding: 7px 18px; font-size: 13px; font-weight: 500; transition: opacity .15s; }
     .modal-btn-solid:hover { opacity: .85; }
 
-    /* ── SCROLLBAR ── */
+    /* â”€â”€ SCROLLBAR â”€â”€ */
     ::-webkit-scrollbar { width: 5px; }
     ::-webkit-scrollbar-track { background: transparent; }
     ::-webkit-scrollbar-thumb { background: var(--border-2); border-radius: 99px; }
 
-    /* ── RESPONSIVE ── */
+    /* â”€â”€ RESPONSIVE â”€â”€ */
     @media (max-width: 860px) {
       .profile-grid { grid-template-columns: 1fr; }
     }
@@ -347,7 +348,7 @@ $year_levels = ['','1st Year','2nd Year','3rd Year','4th Year','5th Year'];
 </head>
 <body>
 
-<!-- ── NAVBAR ── -->
+<!-- â”€â”€ NAVBAR â”€â”€ -->
 <nav class="navbar">
   <div class="nav-logo">Ti<span>Peed</span></div>
   <div class="nav-links">
@@ -362,7 +363,7 @@ $year_levels = ['','1st Year','2nd Year','3rd Year','4th Year','5th Year'];
   <div class="nav-right">
     <div class="search-wrap">
       <i class="fas fa-search"></i>
-      <input type="text" placeholder="Search threads…">
+      <input type="text" placeholder="Search threadsâ€¦">
     </div>
     <button class="theme-btn" id="themeBtn" title="Toggle dark mode">
       <i class="fas fa-moon"></i>
@@ -370,7 +371,7 @@ $year_levels = ['','1st Year','2nd Year','3rd Year','4th Year','5th Year'];
   </div>
 </nav>
 
-<!-- ── LAYOUT ── -->
+<!-- â”€â”€ LAYOUT â”€â”€ -->
 <div class="layout">
 
   <!-- SIDEBAR -->
@@ -508,7 +509,7 @@ $year_levels = ['','1st Year','2nd Year','3rd Year','4th Year','5th Year'];
   </main>
 </div>
 
-<!-- ── EDIT PROFILE MODAL ── -->
+<!-- â”€â”€ EDIT PROFILE MODAL â”€â”€ -->
 <div class="overlay" id="editProfileOverlay">
   <div class="modal">
     <div class="modal-header">
@@ -545,7 +546,7 @@ $year_levels = ['','1st Year','2nd Year','3rd Year','4th Year','5th Year'];
   </div>
 </div>
 
-<!-- ── CHANGE PASSWORD MODAL ── -->
+<!-- â”€â”€ CHANGE PASSWORD MODAL â”€â”€ -->
 <div class="overlay" id="changePasswordOverlay">
   <div class="modal">
     <div class="modal-header">
@@ -575,7 +576,7 @@ $year_levels = ['','1st Year','2nd Year','3rd Year','4th Year','5th Year'];
 </div>
 
 <script>
-  /* ── THEME ── */
+  /* â”€â”€ THEME â”€â”€ */
   const root = document.documentElement;
   const themeBtn = document.getElementById('themeBtn');
   const saved = localStorage.getItem('tipeed-theme') || 'light';
@@ -591,7 +592,7 @@ $year_levels = ['','1st Year','2nd Year','3rd Year','4th Year','5th Year'];
     themeBtn.innerHTML = t === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
   }
 
-  /* ── TABS ── */
+  /* â”€â”€ TABS â”€â”€ */
   document.querySelectorAll('.tab-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -601,7 +602,7 @@ $year_levels = ['','1st Year','2nd Year','3rd Year','4th Year','5th Year'];
     });
   });
 
-  /* ── MODAL HELPERS ── */
+  /* â”€â”€ MODAL HELPERS â”€â”€ */
   function openModal(id)  { document.getElementById(id).classList.add('open'); }
   function closeModal(id) { document.getElementById(id).classList.remove('open'); }
 
@@ -614,7 +615,7 @@ $year_levels = ['','1st Year','2nd Year','3rd Year','4th Year','5th Year'];
   bindModal(['openEditProfile','openEditProfile2'], 'editProfileOverlay', ['closeEditProfile','cancelEditProfile']);
   bindModal(['openChangePassword'], 'changePasswordOverlay', ['closeChangePassword','cancelChangePassword']);
 
-  /* ── RESET PASSWORD FORM ON CLOSE ── */
+  /* â”€â”€ RESET PASSWORD FORM ON CLOSE â”€â”€ */
   document.getElementById('cancelChangePassword').addEventListener('click', () => document.getElementById('passwordForm').reset());
   document.getElementById('closeChangePassword').addEventListener('click',  () => document.getElementById('passwordForm').reset());
 </script>

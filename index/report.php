@@ -1,4 +1,5 @@
-<?php
+﻿<?php
+include "db_connect.php";
 session_start();
 
 if (!isset($_SESSION['userid']) || $_SESSION['role'] !== 'admin') {
@@ -55,18 +56,18 @@ else                          $studentIDT = ucfirst(htmlspecialchars($role));
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Reports — TIPeed</title>
+  <title>Reports â€” TIPeed</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
-    /* ─── Reset ─── */
+    /* â”€â”€â”€ Reset â”€â”€â”€ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     a { color: inherit; text-decoration: none; }
     button { font-family: var(--font); cursor: pointer; }
 
-    /* ─── Tokens ─── */
+    /* â”€â”€â”€ Tokens â”€â”€â”€ */
     :root {
       --bg:        #f7f6f3;
       --surface:   #ffffff;
@@ -115,7 +116,7 @@ else                          $studentIDT = ucfirst(htmlspecialchars($role));
       --purple-bg: #1a1230;  --purple-text:#a78bfa;
     }
 
-    /* ─── Base ─── */
+    /* â”€â”€â”€ Base â”€â”€â”€ */
     body {
       font-family: var(--font);
       background: var(--bg);
@@ -126,7 +127,7 @@ else                          $studentIDT = ucfirst(htmlspecialchars($role));
       overflow: hidden;
     }
 
-    /* ─── Navbar ─── */
+    /* â”€â”€â”€ Navbar â”€â”€â”€ */
     .navbar {
       display: flex; align-items: center; gap: 4px;
       padding: 0 24px; height: 52px;
@@ -162,7 +163,7 @@ else                          $studentIDT = ucfirst(htmlspecialchars($role));
     }
     .icon-btn:hover { background: var(--tag-bg); color: var(--text); }
 
-    /* ─── Layout ─── */
+    /* â”€â”€â”€ Layout â”€â”€â”€ */
     .layout {
       display: grid;
       grid-template-columns: 220px 1fr;
@@ -170,7 +171,7 @@ else                          $studentIDT = ucfirst(htmlspecialchars($role));
       overflow: hidden;
     }
 
-    /* ─── Sidebar ─── */
+    /* â”€â”€â”€ Sidebar â”€â”€â”€ */
     .sidebar {
       background: var(--surface);
       border-right: 0.5px solid var(--border);
@@ -215,12 +216,12 @@ else                          $studentIDT = ucfirst(htmlspecialchars($role));
     }
     .sidebar-bottom a:hover { color: var(--red-text); }
 
-    /* ─── Main ─── */
+    /* â”€â”€â”€ Main â”€â”€â”€ */
     .main { overflow-y: auto; padding: 28px 32px; }
     .main::-webkit-scrollbar { width: 4px; }
     .main::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
 
-    /* ─── Page header ─── */
+    /* â”€â”€â”€ Page header â”€â”€â”€ */
     .page-eyebrow {
       font-size: 11px; font-weight: 500; color: var(--red-text);
       text-transform: uppercase; letter-spacing: 0.08em;
@@ -241,7 +242,7 @@ else                          $studentIDT = ucfirst(htmlspecialchars($role));
     .back-link:hover { color: var(--text); background: var(--tag-bg); }
     .back-link i { font-size: 10px; }
 
-    /* ─── Stats strip ─── */
+    /* â”€â”€â”€ Stats strip â”€â”€â”€ */
     .stats-strip { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
     .stat-card {
       background: var(--surface);
@@ -256,7 +257,7 @@ else                          $studentIDT = ucfirst(htmlspecialchars($role));
     .stat-num.green  { color: var(--green-text); }
     .stat-label { font-size: 11px; color: var(--text3); }
 
-    /* ─── Toolbar ─── */
+    /* â”€â”€â”€ Toolbar â”€â”€â”€ */
     .toolbar { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; align-items: center; }
     .filter-bar {
       display: flex; gap: 4px;
@@ -283,7 +284,7 @@ else                          $studentIDT = ucfirst(htmlspecialchars($role));
     }
     .toolbar-search input::placeholder { color: var(--text3); }
 
-    /* ─── Reports list card ─── */
+    /* â”€â”€â”€ Reports list card â”€â”€â”€ */
     .reports-card {
       background: var(--surface);
       border: 0.5px solid var(--border);
@@ -291,7 +292,7 @@ else                          $studentIDT = ucfirst(htmlspecialchars($role));
       overflow: hidden;
     }
 
-    /* ─── Report row ─── */
+    /* â”€â”€â”€ Report row â”€â”€â”€ */
     .report-row {
       display: flex; gap: 12px; align-items: flex-start;
       padding: 14px 20px;
@@ -324,7 +325,7 @@ else                          $studentIDT = ucfirst(htmlspecialchars($role));
     .row-reporter { font-size: 11px; color: var(--text2); }
     .row-actions { display: flex; gap: 5px; }
 
-    /* ─── Badges ─── */
+    /* â”€â”€â”€ Badges â”€â”€â”€ */
     .badge {
       display: inline-flex; align-items: center;
       padding: 2px 7px; border-radius: 4px;
@@ -335,7 +336,7 @@ else                          $studentIDT = ucfirst(htmlspecialchars($role));
     .badge.investigating{ background: var(--blue-bg);  color: var(--blue-text); }
     .badge-type         { background: var(--tag-bg);   color: var(--tag-text); font-size: 10px; font-family: var(--mono); padding: 2px 6px; border-radius: 4px; }
 
-    /* ─── Buttons ─── */
+    /* â”€â”€â”€ Buttons â”€â”€â”€ */
     .btn {
       display: inline-flex; align-items: center; gap: 5px;
       padding: 5px 10px; border-radius: var(--radius);
@@ -353,7 +354,7 @@ else                          $studentIDT = ucfirst(htmlspecialchars($role));
     .btn.primary:hover { opacity: 0.85; }
     .btn i { font-size: 10px; }
 
-    /* ─── Empty state ─── */
+    /* â”€â”€â”€ Empty state â”€â”€â”€ */
     .empty-state {
       padding: 60px 24px; text-align: center;
     }
@@ -366,10 +367,10 @@ else                          $studentIDT = ucfirst(htmlspecialchars($role));
     .empty-title { font-size: 14px; font-weight: 500; margin-bottom: 4px; }
     .empty-sub   { font-size: 12px; color: var(--text3); }
 
-    /* ─── Load more ─── */
+    /* â”€â”€â”€ Load more â”€â”€â”€ */
     .load-more-row { padding: 14px 20px; border-top: 0.5px solid var(--border); text-align: center; }
 
-    /* ─── Detail Modal ─── */
+    /* â”€â”€â”€ Detail Modal â”€â”€â”€ */
     .modal-bg {
       position: fixed; inset: 0;
       background: rgba(0,0,0,0.32); z-index: 200;
@@ -420,7 +421,7 @@ else                          $studentIDT = ucfirst(htmlspecialchars($role));
     }
     .modal-footer .btn { padding: 7px 14px; font-size: 12px; }
 
-    /* ─── Toast ─── */
+    /* â”€â”€â”€ Toast â”€â”€â”€ */
     .toast {
       position: fixed; bottom: 20px; right: 20px;
       background: var(--surface); border: 0.5px solid var(--border);
@@ -434,7 +435,7 @@ else                          $studentIDT = ucfirst(htmlspecialchars($role));
 </head>
 <body>
 
-<!-- ═══ NAVBAR ═══ -->
+<!-- â•â•â• NAVBAR â•â•â• -->
 <nav class="navbar">
   <div class="logo">TIPeed</div>
   <div class="nav-links">
@@ -449,7 +450,7 @@ else                          $studentIDT = ucfirst(htmlspecialchars($role));
   <div class="nav-right">
     <div class="search">
       <i class="fas fa-search"></i>
-      <input type="text" placeholder="Search topics…">
+      <input type="text" placeholder="Search topicsâ€¦">
     </div>
     <button class="icon-btn" id="darkToggle" title="Toggle dark mode">
       <i class="fas fa-moon" id="darkIcon"></i>
@@ -457,7 +458,7 @@ else                          $studentIDT = ucfirst(htmlspecialchars($role));
   </div>
 </nav>
 
-<!-- ═══ LAYOUT ═══ -->
+<!-- â•â•â• LAYOUT â•â•â• -->
 <div class="layout">
 
   <!-- Sidebar -->
@@ -496,7 +497,7 @@ else                          $studentIDT = ucfirst(htmlspecialchars($role));
   <main class="main">
 
     <!-- Header -->
-    <div class="page-eyebrow">Admin · Content Moderation</div>
+    <div class="page-eyebrow">Admin Â· Content Moderation</div>
     <div class="page-title-row">
       <div class="page-title">User Reports</div>
       <a href="<?= $homePage ?>" class="back-link">
@@ -537,7 +538,7 @@ else                          $studentIDT = ucfirst(htmlspecialchars($role));
       </div>
       <div class="toolbar-search">
         <i class="fas fa-search"></i>
-        <input type="text" id="reportSearch" placeholder="Search reports…">
+        <input type="text" id="reportSearch" placeholder="Search reportsâ€¦">
       </div>
     </div>
 
@@ -569,7 +570,7 @@ else                          $studentIDT = ucfirst(htmlspecialchars($role));
           $desc    = htmlspecialchars((!empty($r['description']) ? $r['description'] : ($r['reported_content'] ?? '')) ?: 'No description');
           $reporter     = htmlspecialchars($r['reporter_name'] ?? 'Unknown');
           $reportedUser = htmlspecialchars($r['reported_user_name'] ?? ($r['reported_user_id'] ?? 'Unknown'));
-          $created_at   = !empty($r['created_at']) ? date('M j, Y · H:i', strtotime($r['created_at'])) : '—';
+          $created_at   = !empty($r['created_at']) ? date('M j, Y Â· H:i', strtotime($r['created_at'])) : 'â€”';
         ?>
         <div class="report-row <?= $isUnread ? 'is-unread' : '' ?>"
              data-status="<?= $r_status ?>"
@@ -584,7 +585,7 @@ else                          $studentIDT = ucfirst(htmlspecialchars($role));
           <div class="row-body">
             <div class="row-top">
               <div class="row-title">
-                <?= htmlspecialchars(ucfirst($r['report_type'] ?? 'Report')) ?> · <span style="font-family:var(--mono);font-size:11px;color:var(--text3)">#<?= htmlspecialchars($r['report_id']) ?></span>
+                <?= htmlspecialchars(ucfirst($r['report_type'] ?? 'Report')) ?> Â· <span style="font-family:var(--mono);font-size:11px;color:var(--text3)">#<?= htmlspecialchars($r['report_id']) ?></span>
               </div>
               <div style="display:flex;gap:5px;align-items:center">
                 <span class="badge <?= $r_status ?>"><?= ucfirst($r_status) ?></span>
@@ -627,7 +628,7 @@ else                          $studentIDT = ucfirst(htmlspecialchars($role));
                   data-date="<?= $created_at ?>"
                   data-description="<?= htmlspecialchars($r['description'] ?? '') ?>"
                   data-content="<?= htmlspecialchars($r['reported_content'] ?? '') ?>"
-                  data-priority="<?= htmlspecialchars($r['priority'] ?? '—') ?>">
+                  data-priority="<?= htmlspecialchars($r['priority'] ?? 'â€”') ?>">
                   Details
                 </button>
               </div>
@@ -644,7 +645,7 @@ else                          $studentIDT = ucfirst(htmlspecialchars($role));
   </main>
 </div><!-- /.layout -->
 
-<!-- ═══ DETAIL MODAL ═══ -->
+<!-- â•â•â• DETAIL MODAL â•â•â• -->
 <div class="modal-bg" id="detailModal">
   <div class="modal">
     <div class="modal-header">
@@ -663,7 +664,7 @@ else                          $studentIDT = ucfirst(htmlspecialchars($role));
 </div>
 
 <script>
-// ── Dark mode ──
+// â”€â”€ Dark mode â”€â”€
 const darkToggle = document.getElementById('darkToggle');
 const darkIcon   = document.getElementById('darkIcon');
 let dark = localStorage.getItem('tipeed_dark') === '1';
@@ -678,7 +679,7 @@ darkToggle.addEventListener('click', () => {
   applyDark();
 });
 
-// ── Toast ──
+// â”€â”€ Toast â”€â”€
 function showToast(msg, type) {
   const t  = document.getElementById('toast');
   const ti = document.getElementById('toastIcon');
@@ -689,7 +690,7 @@ function showToast(msg, type) {
   setTimeout(() => t.classList.remove('show'), 3000);
 }
 
-// ── Modal ──
+// â”€â”€ Modal â”€â”€
 function openModal()  { document.getElementById('detailModal').classList.add('open'); }
 function closeModal() { document.getElementById('detailModal').classList.remove('open'); }
 document.getElementById('closeModal').addEventListener('click', closeModal);
@@ -697,7 +698,7 @@ document.getElementById('detailModal').addEventListener('click', e => {
   if (e.target === document.getElementById('detailModal')) closeModal();
 });
 
-// ── Filter ──
+// â”€â”€ Filter â”€â”€
 document.querySelectorAll('.filter-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
@@ -724,7 +725,7 @@ function filterRows() {
   });
 }
 
-// ── Details modal ──
+// â”€â”€ Details modal â”€â”€
 document.querySelectorAll('.details-btn').forEach(btn => {
   btn.addEventListener('click', e => {
     e.stopPropagation();
@@ -735,12 +736,12 @@ document.querySelectorAll('.details-btn').forEach(btn => {
 
     document.getElementById('modalBody').innerHTML = `
       <div class="detail-row"><div class="detail-key">Report ID</div><div class="detail-val" style="font-family:var(--mono)">#${d.id}</div></div>
-      <div class="detail-row"><div class="detail-key">Type</div><div class="detail-val">${d.type || '—'}</div></div>
+      <div class="detail-row"><div class="detail-key">Type</div><div class="detail-val">${d.type || 'â€”'}</div></div>
       <div class="detail-row"><div class="detail-key">Status</div><div class="detail-val">${statusBadge}</div></div>
       <div class="detail-row"><div class="detail-key">Reported By</div><div class="detail-val">${d.reporter}</div></div>
       <div class="detail-row"><div class="detail-key">Reported User</div><div class="detail-val">${d.reportedUser}</div></div>
       <div class="detail-row"><div class="detail-key">Date</div><div class="detail-val" style="font-family:var(--mono);font-size:12px">${d.date}</div></div>
-      <div class="detail-row"><div class="detail-key">Priority</div><div class="detail-val">${d.priority || '—'}</div></div>
+      <div class="detail-row"><div class="detail-key">Priority</div><div class="detail-val">${d.priority || 'â€”'}</div></div>
       ${d.description ? `<div class="content-box"><strong>Description</strong>${d.description}</div>` : ''}
       ${d.content     ? `<div class="content-box"><strong>Reported Content</strong>${d.content}</div>` : ''}`;
 
@@ -755,7 +756,7 @@ document.querySelectorAll('.details-btn').forEach(btn => {
   });
 });
 
-// ── Resolve inline ──
+// â”€â”€ Resolve inline â”€â”€
 document.querySelectorAll('.resolve-btn').forEach(btn => {
   btn.addEventListener('click', e => {
     e.stopPropagation();
@@ -780,7 +781,7 @@ document.querySelectorAll('.resolve-btn').forEach(btn => {
   });
 });
 
-// ── Row click → details ──
+// â”€â”€ Row click â†’ details â”€â”€
 document.querySelectorAll('.report-row').forEach(row => {
   row.addEventListener('click', () => {
     const detailsBtn = row.querySelector('.details-btn');

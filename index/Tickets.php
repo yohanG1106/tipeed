@@ -1,4 +1,5 @@
-<?php
+﻿<?php
+include "db_connect.php";
 session_start();
 include 'db_connect.php';
 
@@ -39,14 +40,14 @@ if ($currentUserRole === 'admin') {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Support Tickets — TiPeed</title>
+  <title>Support Tickets â€” TiPeed</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 
   <style>
-    /* ── TOKENS ─────────────────────────────────── */
+    /* â”€â”€ TOKENS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
     :root {
       --bg:        #f7f6f3;
       --bg-card:   #ffffff;
@@ -111,7 +112,7 @@ if ($currentUserRole === 'admin') {
     button { font-family: var(--font); cursor: pointer; }
     input, select, textarea { font-family: var(--font); }
 
-    /* ── NAVBAR ──────────────────────────────────── */
+    /* â”€â”€ NAVBAR â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
     .navbar {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       height: var(--nav-h); background: var(--bg-card);
@@ -132,14 +133,14 @@ if ($currentUserRole === 'admin') {
     .theme-btn { width: 34px; height: 34px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg-input); color: var(--text-2); font-size: 14px; display: flex; align-items: center; justify-content: center; transition: background .15s; }
     .theme-btn:hover { background: var(--bg-muted); }
 
-    /* ── FULL-HEIGHT LAYOUT ──────────────────────── */
+    /* â”€â”€ FULL-HEIGHT LAYOUT â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
     .layout {
       display: flex;
       height: calc(100vh - var(--nav-h));
       margin-top: var(--nav-h);
     }
 
-    /* ── LEFT NAV SIDEBAR ────────────────────────── */
+    /* â”€â”€ LEFT NAV SIDEBAR â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
     .nav-sidebar {
       width: var(--sidebar-w); flex-shrink: 0;
       border-right: 1px solid var(--border);
@@ -157,7 +158,7 @@ if ($currentUserRole === 'admin') {
     .menu-item i { width: 16px; text-align: center; font-size: 13px; color: var(--text-3); flex-shrink: 0; }
     .menu-divider { height: 1px; background: var(--border); margin: 8px 4px; }
 
-    /* ── TICKETS PANEL ───────────────────────────── */
+    /* â”€â”€ TICKETS PANEL â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
     .tickets-panel {
       width: var(--panel-w); flex-shrink: 0;
       border-right: 1px solid var(--border);
@@ -223,7 +224,7 @@ if ($currentUserRole === 'admin') {
     .no-tickets i { font-size: 32px; display: block; margin-bottom: 10px; }
     .no-tickets p { font-size: 13px; }
 
-    /* ── CHAT AREA ───────────────────────────────── */
+    /* â”€â”€ CHAT AREA â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
     .chat-area {
       flex: 1; min-width: 0;
       display: flex; flex-direction: column;
@@ -305,7 +306,7 @@ if ($currentUserRole === 'admin') {
 </head>
 <body>
 
-<!-- ── NAVBAR ─────────────────────────────────────────── -->
+<!-- â”€â”€ NAVBAR â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
 <nav class="navbar">
   <div class="nav-logo">Ti<span>Peed</span></div>
   <div class="nav-links">
@@ -320,13 +321,13 @@ if ($currentUserRole === 'admin') {
   <div class="nav-right">
     <div class="search-wrap">
       <i class="fas fa-search"></i>
-      <input type="text" id="navSearch" placeholder="Search tickets…">
+      <input type="text" id="navSearch" placeholder="Search ticketsâ€¦">
     </div>
     <button class="theme-btn" id="themeBtn"><i class="fas fa-moon"></i></button>
   </div>
 </nav>
 
-<!-- ── LAYOUT ─────────────────────────────────────────── -->
+<!-- â”€â”€ LAYOUT â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
 <div class="layout">
 
   <!-- Left nav sidebar -->
@@ -380,7 +381,7 @@ if ($currentUserRole === 'admin') {
     <div class="tp-search">
       <div class="tp-search-inner">
         <i class="fas fa-search"></i>
-        <input type="text" id="ticketSearch" placeholder="Search tickets…">
+        <input type="text" id="ticketSearch" placeholder="Search ticketsâ€¦">
       </div>
     </div>
     <div class="tp-list" id="ticketsList"></div>
@@ -402,7 +403,7 @@ if ($currentUserRole === 'admin') {
 <div id="toastContainer"></div>
 
 <script>
-  // ── DARK MODE ──
+  // â”€â”€ DARK MODE â”€â”€
   const root     = document.documentElement;
   const themeBtn = document.getElementById('themeBtn');
   const saved    = localStorage.getItem('tipeed-theme') || 'light';
@@ -416,13 +417,13 @@ if ($currentUserRole === 'admin') {
   });
   function updateIcon(t) { themeBtn.innerHTML = t === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>'; }
 
-  // ── STATE ──
+  // â”€â”€ STATE â”€â”€
   let allTickets     = [];
   let selectedTicket = null;
   const currentUserID   = '<?= $currentUserId ?>';
   const currentUserRole = '<?= $role ?>';
 
-  // ── FETCH ──
+  // â”€â”€ FETCH â”€â”€
   function fetchTickets(refreshChat = false) {
     fetch('get_tickets.php')
       .then(r => r.json())
@@ -437,7 +438,7 @@ if ($currentUserRole === 'admin') {
       .catch(e => console.error('Fetch tickets error:', e));
   }
 
-  // ── RENDER LIST ──
+  // â”€â”€ RENDER LIST â”€â”€
   function renderList() {
     const sv = document.getElementById('statusFilter').value;
     const pv = document.getElementById('priorityFilter').value;
@@ -482,7 +483,7 @@ if ($currentUserRole === 'admin') {
     });
   }
 
-  // ── RENDER CHAT ──
+  // â”€â”€ RENDER CHAT â”€â”€
   function renderChat() {
     if (!selectedTicket) return;
     const t = selectedTicket;
@@ -535,7 +536,7 @@ if ($currentUserRole === 'admin') {
       <div class="input-bar">
         <div class="input-wrap">
           <textarea class="msg-input" id="chatInput" rows="1"
-                    placeholder="Reply to ${t.userName||'the user'}…"></textarea>
+                    placeholder="Reply to ${t.userName||'the user'}â€¦"></textarea>
         </div>
         <button class="send-btn" id="sendBtn"><i class="fas fa-paper-plane"></i></button>
       </div>`;
@@ -553,7 +554,7 @@ if ($currentUserRole === 'admin') {
     document.getElementById('sendBtn')?.addEventListener('click', sendMsg);
   }
 
-  // ── SEND MESSAGE ──
+  // â”€â”€ SEND MESSAGE â”€â”€
   function sendMsg() {
     const ci  = document.getElementById('chatInput');
     const msg = ci?.value.trim();
@@ -575,7 +576,7 @@ if ($currentUserRole === 'admin') {
     .catch(() => showToast('Error sending message', 'err'));
   }
 
-  // ── UPDATE STATUS ──
+  // â”€â”€ UPDATE STATUS â”€â”€
   function updateStatus(status) {
     if (!selectedTicket) return;
     fetch('update_ticket_status.php', {
@@ -590,7 +591,7 @@ if ($currentUserRole === 'admin') {
     });
   }
 
-  // ── DELETE TICKET ──
+  // â”€â”€ DELETE TICKET â”€â”€
   function deleteTicket() {
     if (!selectedTicket) return;
     if (!confirm(`Delete ticket "${selectedTicket.subject}"? This cannot be undone.`)) return;
@@ -606,7 +607,7 @@ if ($currentUserRole === 'admin') {
     showToast('Ticket deleted', 'ok');
   }
 
-  // ── TOAST ──
+  // â”€â”€ TOAST â”€â”€
   function showToast(msg, type = 'ok') {
     const c   = document.getElementById('toastContainer');
     const ico = type === 'ok' ? 'fa-circle-check toast-icon-ok' : 'fa-circle-xmark toast-icon-err';
@@ -618,7 +619,7 @@ if ($currentUserRole === 'admin') {
     setTimeout(() => { el.classList.remove('show'); setTimeout(() => el.remove(), 320); }, 4000);
   }
 
-  // ── HELPERS ──
+  // â”€â”€ HELPERS â”€â”€
   function formatDate(ds) {
     if (!ds) return '';
     const d = new Date(ds);
@@ -630,13 +631,13 @@ if ($currentUserRole === 'admin') {
     return new Date(ts).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   }
 
-  // ── FILTER LISTENERS ──
+  // â”€â”€ FILTER LISTENERS â”€â”€
   ['statusFilter','priorityFilter','ticketSearch'].forEach(id =>
     document.getElementById(id)?.addEventListener('input', renderList)
   );
   document.getElementById('navSearch')?.addEventListener('input', renderList);
 
-  // ── INIT ──
+  // â”€â”€ INIT â”€â”€
   document.addEventListener('DOMContentLoaded', () => {
     fetchTickets();
     setInterval(() => {

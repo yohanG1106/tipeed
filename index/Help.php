@@ -1,7 +1,8 @@
-<?php
+﻿<?php
 header("Cache-Control: no-cache, no-store, must-revalidate");
 header("Pragma: no-cache");
 header("Expires: 0");
+include "db_connect.php";
 session_start();
 include 'db_connect.php';
 
@@ -37,18 +38,18 @@ else                          $studentIDT = ucfirst(htmlspecialchars($role));
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Help Center — TIPeed</title>
+  <title>Help Center â€” TIPeed</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
-    /* ─── Reset ─── */
+    /* â”€â”€â”€ Reset â”€â”€â”€ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     a { color: inherit; text-decoration: none; }
     button { font-family: var(--font); cursor: pointer; }
 
-    /* ─── Tokens ─── */
+    /* â”€â”€â”€ Tokens â”€â”€â”€ */
     :root {
       --bg:        #f7f6f3;
       --surface:   #ffffff;
@@ -97,7 +98,7 @@ else                          $studentIDT = ucfirst(htmlspecialchars($role));
       --purple-bg: #1a1230;  --purple-text:#a78bfa;
     }
 
-    /* ─── Base ─── */
+    /* â”€â”€â”€ Base â”€â”€â”€ */
     body {
       font-family: var(--font);
       background: var(--bg);
@@ -108,7 +109,7 @@ else                          $studentIDT = ucfirst(htmlspecialchars($role));
       overflow: hidden;
     }
 
-    /* ─── Navbar ─── */
+    /* â”€â”€â”€ Navbar â”€â”€â”€ */
     .navbar {
       display: flex; align-items: center; gap: 4px;
       padding: 0 24px; height: 52px;
@@ -144,7 +145,7 @@ else                          $studentIDT = ucfirst(htmlspecialchars($role));
     }
     .icon-btn:hover { background: var(--tag-bg); color: var(--text); }
 
-    /* ─── Layout ─── */
+    /* â”€â”€â”€ Layout â”€â”€â”€ */
     .layout {
       display: grid;
       grid-template-columns: 220px 1fr;
@@ -152,7 +153,7 @@ else                          $studentIDT = ucfirst(htmlspecialchars($role));
       overflow: hidden;
     }
 
-    /* ─── Sidebar ─── */
+    /* â”€â”€â”€ Sidebar â”€â”€â”€ */
     .sidebar {
       background: var(--surface);
       border-right: 0.5px solid var(--border);
@@ -197,12 +198,12 @@ else                          $studentIDT = ucfirst(htmlspecialchars($role));
     }
     .sidebar-bottom a:hover { color: var(--red-text); }
 
-    /* ─── Main ─── */
+    /* â”€â”€â”€ Main â”€â”€â”€ */
     .main { overflow-y: auto; padding: 28px 32px; }
     .main::-webkit-scrollbar { width: 4px; }
     .main::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
 
-    /* ─── Hero ─── */
+    /* â”€â”€â”€ Hero â”€â”€â”€ */
     .hero {
       background: var(--accent-bg);
       border-radius: var(--radius-xl);
@@ -248,10 +249,10 @@ else                          $studentIDT = ucfirst(htmlspecialchars($role));
     .hero-btn.gold:hover { background: var(--gold-dark); border-color: var(--gold-dark); }
     .hero-btn i { font-size: 11px; }
 
-    /* ─── Two-col grid ─── */
+    /* â”€â”€â”€ Two-col grid â”€â”€â”€ */
     .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
 
-    /* ─── Card ─── */
+    /* â”€â”€â”€ Card â”€â”€â”€ */
     .card {
       background: var(--surface);
       border: 0.5px solid var(--border);
@@ -267,7 +268,7 @@ else                          $studentIDT = ucfirst(htmlspecialchars($role));
     .card-sub   { font-size: 11px; color: var(--text3); margin-top: 2px; }
     .card-body  { padding: 16px 20px; }
 
-    /* ─── Help categories ─── */
+    /* â”€â”€â”€ Help categories â”€â”€â”€ */
     .cat-grid {
       display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
       padding: 16px 20px;
@@ -295,7 +296,7 @@ else                          $studentIDT = ucfirst(htmlspecialchars($role));
     .cat-arrow { margin-left: auto; color: var(--text3); font-size: 11px; flex-shrink: 0; margin-top: 2px; transition: var(--trans); }
     .cat-item:hover .cat-arrow { color: var(--text); transform: translateX(2px); }
 
-    /* ─── FAQ ─── */
+    /* â”€â”€â”€ FAQ â”€â”€â”€ */
     .faq-list { display: flex; flex-direction: column; }
     .faq-item { border-bottom: 0.5px solid var(--border); }
     .faq-item:last-child { border-bottom: none; }
@@ -316,7 +317,7 @@ else                          $studentIDT = ucfirst(htmlspecialchars($role));
     }
     .faq-item.open .faq-a { max-height: 200px; padding: 0 20px 14px; }
 
-    /* ─── Contact methods ─── */
+    /* â”€â”€â”€ Contact methods â”€â”€â”€ */
     .contact-grid {
       display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
       padding: 16px 20px;
@@ -340,7 +341,7 @@ else                          $studentIDT = ucfirst(htmlspecialchars($role));
     .contact-desc { font-size: 11px; color: var(--text3); }
     .contact-link { font-size: 11px; color: var(--blue-text); margin-top: 3px; display: block; font-family: var(--mono); }
 
-    /* ─── Modal ─── */
+    /* â”€â”€â”€ Modal â”€â”€â”€ */
     .modal-bg {
       position: fixed; inset: 0;
       background: rgba(0,0,0,0.32); z-index: 200;
@@ -424,7 +425,7 @@ else                          $studentIDT = ucfirst(htmlspecialchars($role));
     .priority-opt.selected.high   { background: var(--gold-bg);  color: var(--gold-text);  border-color: rgba(245,179,1,0.3); }
     .priority-opt.selected.urgent { background: var(--red-bg);   color: var(--red-text);   border-color: rgba(192,57,43,0.3); }
 
-    /* ─── Toast ─── */
+    /* â”€â”€â”€ Toast â”€â”€â”€ */
     .toast {
       position: fixed; bottom: 20px; right: 20px;
       background: var(--surface); border: 0.5px solid var(--border);
@@ -438,7 +439,7 @@ else                          $studentIDT = ucfirst(htmlspecialchars($role));
 </head>
 <body>
 
-<!-- ═══ NAVBAR ═══ -->
+<!-- â•â•â• NAVBAR â•â•â• -->
 <nav class="navbar">
   <div class="logo">TIPeed</div>
   <div class="nav-links">
@@ -453,7 +454,7 @@ else                          $studentIDT = ucfirst(htmlspecialchars($role));
   <div class="nav-right">
     <div class="search">
       <i class="fas fa-search"></i>
-      <input type="text" placeholder="Search topics…">
+      <input type="text" placeholder="Search topicsâ€¦">
     </div>
     <button class="icon-btn" id="darkToggle" title="Toggle dark mode">
       <i class="fas fa-moon" id="darkIcon"></i>
@@ -461,7 +462,7 @@ else                          $studentIDT = ucfirst(htmlspecialchars($role));
   </div>
 </nav>
 
-<!-- ═══ LAYOUT ═══ -->
+<!-- â•â•â• LAYOUT â•â•â• -->
 <div class="layout">
 
   <!-- Sidebar -->
@@ -508,7 +509,7 @@ else                          $studentIDT = ucfirst(htmlspecialchars($role));
         <div class="hero-sub">Search the docs, browse FAQs, or open a ticket.</div>
         <div class="hero-search" style="margin-top:16px">
           <i class="fas fa-search"></i>
-          <input type="text" id="heroSearch" placeholder="Search help articles…">
+          <input type="text" id="heroSearch" placeholder="Search help articlesâ€¦">
         </div>
       </div>
       <div class="hero-right">
@@ -596,7 +597,7 @@ else                          $studentIDT = ucfirst(htmlspecialchars($role));
               Can I customize my notifications?
               <i class="fas fa-chevron-down faq-icon"></i>
             </div>
-            <div class="faq-a">Yes — go to Settings to choose what triggers a notification (new threads, replies, announcements) and whether you receive them in-app or by email.</div>
+            <div class="faq-a">Yes â€” go to Settings to choose what triggers a notification (new threads, replies, announcements) and whether you receive them in-app or by email.</div>
           </div>
           <div class="faq-item">
             <div class="faq-q">
@@ -638,7 +639,7 @@ else                          $studentIDT = ucfirst(htmlspecialchars($role));
           <div class="contact-icon"><i class="fas fa-phone"></i></div>
           <div>
             <div class="contact-name">Phone Support</div>
-            <div class="contact-desc">Mon–Fri, 9 AM–5 PM</div>
+            <div class="contact-desc">Monâ€“Fri, 9 AMâ€“5 PM</div>
             <a href="tel:+18005551234" class="contact-link">+1 (800) 555-1234</a>
           </div>
         </div>
@@ -647,7 +648,7 @@ else                          $studentIDT = ucfirst(htmlspecialchars($role));
           <div>
             <div class="contact-name">Live Chat</div>
             <div class="contact-desc">Available during business hours</div>
-            <span class="contact-link">Open chat →</span>
+            <span class="contact-link">Open chat â†’</span>
           </div>
         </div>
         <div class="contact-item">
@@ -655,7 +656,7 @@ else                          $studentIDT = ucfirst(htmlspecialchars($role));
           <div>
             <div class="contact-name">IT Help Desk</div>
             <div class="contact-desc">Library Building, Room 205</div>
-            <span class="contact-link">View campus map →</span>
+            <span class="contact-link">View campus map â†’</span>
           </div>
         </div>
       </div>
@@ -664,7 +665,7 @@ else                          $studentIDT = ucfirst(htmlspecialchars($role));
   </main>
 </div><!-- /.layout -->
 
-<!-- ═══ TICKET MODAL ═══ -->
+<!-- â•â•â• TICKET MODAL â•â•â• -->
 <div class="modal-bg" id="ticketModal">
   <div class="modal">
     <div class="modal-header">
@@ -684,7 +685,7 @@ else                          $studentIDT = ucfirst(htmlspecialchars($role));
           <div class="form-group">
             <label class="form-label" for="ticketCategory">Category <span class="req">*</span></label>
             <select id="ticketCategory" class="form-select" required>
-              <option value="">Select…</option>
+              <option value="">Selectâ€¦</option>
               <option value="technical">Technical Issue</option>
               <option value="account">Account Problem</option>
               <option value="content">Content Issue</option>
@@ -705,7 +706,7 @@ else                          $studentIDT = ucfirst(htmlspecialchars($role));
         </div>
         <div class="form-group">
           <label class="form-label" for="ticketDescription">Description <span class="req">*</span></label>
-          <textarea id="ticketDescription" class="form-textarea" placeholder="Describe your issue in detail…" required></textarea>
+          <textarea id="ticketDescription" class="form-textarea" placeholder="Describe your issue in detailâ€¦" required></textarea>
         </div>
       </form>
     </div>
@@ -725,7 +726,7 @@ else                          $studentIDT = ucfirst(htmlspecialchars($role));
 </div>
 
 <script>
-// ── Dark mode ──
+// â”€â”€ Dark mode â”€â”€
 const darkToggle = document.getElementById('darkToggle');
 const darkIcon   = document.getElementById('darkIcon');
 let dark = localStorage.getItem('tipeed_dark') === '1';
@@ -740,7 +741,7 @@ darkToggle.addEventListener('click', () => {
   applyDark();
 });
 
-// ── Toast ──
+// â”€â”€ Toast â”€â”€
 function showToast(msg, type) {
   const t  = document.getElementById('toast');
   const ti = document.getElementById('toastIcon');
@@ -751,7 +752,7 @@ function showToast(msg, type) {
   setTimeout(() => t.classList.remove('show'), 3500);
 }
 
-// ── Modals ──
+// â”€â”€ Modals â”€â”€
 function openModal(id)  { document.getElementById(id).classList.add('open'); }
 function closeModal(id) { document.getElementById(id).classList.remove('open'); }
 
@@ -764,7 +765,7 @@ document.querySelectorAll('.modal-bg').forEach(bg => {
 
 document.getElementById('openTicketBtn').addEventListener('click', () => openModal('ticketModal'));
 
-// ── Priority selector ──
+// â”€â”€ Priority selector â”€â”€
 document.querySelectorAll('.priority-opt').forEach(opt => {
   opt.addEventListener('click', () => {
     document.querySelectorAll('.priority-opt').forEach(o => o.classList.remove('selected'));
@@ -773,7 +774,7 @@ document.querySelectorAll('.priority-opt').forEach(opt => {
   });
 });
 
-// ── Submit ticket ──
+// â”€â”€ Submit ticket â”€â”€
 document.getElementById('submitTicket').addEventListener('click', () => {
   const subject  = document.getElementById('ticketSubject').value.trim();
   const category = document.getElementById('ticketCategory').value;
@@ -786,7 +787,7 @@ document.getElementById('submitTicket').addEventListener('click', () => {
 
   const btn = document.getElementById('submitTicket');
   btn.disabled = true;
-  btn.innerHTML = '<i class="fas fa-circle-notch fa-spin" style="font-size:10px"></i> Submitting…';
+  btn.innerHTML = '<i class="fas fa-circle-notch fa-spin" style="font-size:10px"></i> Submittingâ€¦';
 
   fetch('submit_ticket.php', {
     method: 'POST',
@@ -811,11 +812,11 @@ document.getElementById('submitTicket').addEventListener('click', () => {
     .catch(() => {
       btn.disabled = false;
       btn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit Ticket';
-      showToast('Server error — please try again.', 'err');
+      showToast('Server error â€” please try again.', 'err');
     });
 });
 
-// ── FAQ accordion ──
+// â”€â”€ FAQ accordion â”€â”€
 document.querySelectorAll('.faq-q').forEach(q => {
   q.addEventListener('click', () => {
     const item = q.closest('.faq-item');
@@ -825,7 +826,7 @@ document.querySelectorAll('.faq-q').forEach(q => {
   });
 });
 
-// ── Hero search (filter FAQ items) ──
+// â”€â”€ Hero search (filter FAQ items) â”€â”€
 document.getElementById('heroSearch').addEventListener('input', function () {
   const q = this.value.toLowerCase();
   if (!q) { document.querySelectorAll('.faq-item').forEach(i => i.style.display = ''); return; }

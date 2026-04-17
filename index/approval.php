@@ -1,4 +1,5 @@
-<?php
+﻿<?php
+include "db_connect.php";
 session_start();
 
 if (!isset($_SESSION['userid']) || $_SESSION['role'] !== 'admin') {
@@ -43,18 +44,18 @@ if ($role === 'student') {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Community Approvals — TIPeed</title>
+  <title>Community Approvals â€” TIPeed</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
-    /* ─── Reset ─── */
+    /* â”€â”€â”€ Reset â”€â”€â”€ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     a { color: inherit; text-decoration: none; }
     button { font-family: var(--font); cursor: pointer; }
 
-    /* ─── Tokens ─── */
+    /* â”€â”€â”€ Tokens â”€â”€â”€ */
     :root {
       --bg:        #f7f6f3;
       --surface:   #ffffff;
@@ -103,7 +104,7 @@ if ($role === 'student') {
       --purple-bg: #1a1230;  --purple-text:#a78bfa;
     }
 
-    /* ─── Base ─── */
+    /* â”€â”€â”€ Base â”€â”€â”€ */
     body {
       font-family: var(--font);
       background: var(--bg);
@@ -114,7 +115,7 @@ if ($role === 'student') {
       overflow: hidden;
     }
 
-    /* ─── Navbar ─── */
+    /* â”€â”€â”€ Navbar â”€â”€â”€ */
     .navbar {
       display: flex; align-items: center; gap: 4px;
       padding: 0 24px; height: 52px;
@@ -150,7 +151,7 @@ if ($role === 'student') {
     }
     .icon-btn:hover { background: var(--tag-bg); color: var(--text); }
 
-    /* ─── Layout ─── */
+    /* â”€â”€â”€ Layout â”€â”€â”€ */
     .layout {
       display: grid;
       grid-template-columns: 220px 1fr;
@@ -158,7 +159,7 @@ if ($role === 'student') {
       overflow: hidden;
     }
 
-    /* ─── Sidebar ─── */
+    /* â”€â”€â”€ Sidebar â”€â”€â”€ */
     .sidebar {
       background: var(--surface);
       border-right: 0.5px solid var(--border);
@@ -203,10 +204,10 @@ if ($role === 'student') {
     }
     .sidebar-bottom a:hover { color: var(--red-text); }
 
-    /* ─── Main ─── */
+    /* â”€â”€â”€ Main â”€â”€â”€ */
     .main { overflow-y: auto; padding: 28px 32px; }
 
-    /* ─── Page header ─── */
+    /* â”€â”€â”€ Page header â”€â”€â”€ */
     .page-header { margin-bottom: 24px; }
     .page-eyebrow {
       font-size: 11px; font-weight: 500; color: var(--purple-text);
@@ -228,7 +229,7 @@ if ($role === 'student') {
     .back-link:hover { color: var(--text); background: var(--tag-bg); }
     .back-link i { font-size: 10px; }
 
-    /* ─── Stats strip ─── */
+    /* â”€â”€â”€ Stats strip â”€â”€â”€ */
     .stats-strip {
       display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap;
     }
@@ -248,7 +249,7 @@ if ($role === 'student') {
     .stat-num.red    { color: var(--red-text); }
     .stat-label { font-size: 11px; color: var(--text3); }
 
-    /* ─── Filter bar ─── */
+    /* â”€â”€â”€ Filter bar â”€â”€â”€ */
     .filter-bar {
       display: flex; gap: 4px; margin-bottom: 16px;
       background: var(--surface);
@@ -265,7 +266,7 @@ if ($role === 'student') {
     .filter-btn:hover { color: var(--text); background: var(--tag-bg); }
     .filter-btn.active { background: var(--accent-bg); color: var(--accent-fg); }
 
-    /* ─── Approval list ─── */
+    /* â”€â”€â”€ Approval list â”€â”€â”€ */
     .approvals-card {
       background: var(--surface);
       border: 0.5px solid var(--border);
@@ -326,7 +327,7 @@ if ($role === 'student') {
     .item-time { font-size: 10px; color: var(--text3); font-family: var(--mono); }
     .item-actions { display: flex; gap: 6px; }
 
-    /* ─── Badges ─── */
+    /* â”€â”€â”€ Badges â”€â”€â”€ */
     .badge {
       display: inline-flex; align-items: center;
       padding: 2px 7px; border-radius: 4px;
@@ -337,7 +338,7 @@ if ($role === 'student') {
     .badge.rejected { background: var(--red-bg);    color: var(--red-text); }
     .badge.type     { background: var(--purple-bg); color: var(--purple-text); }
 
-    /* ─── Buttons ─── */
+    /* â”€â”€â”€ Buttons â”€â”€â”€ */
     .btn {
       padding: 6px 12px; border-radius: var(--radius);
       font-size: 12px; font-weight: 500; font-family: var(--font);
@@ -359,7 +360,7 @@ if ($role === 'student') {
     .btn.primary { background: var(--accent-bg); color: var(--accent-fg); border-color: var(--accent-bg); }
     .btn.primary:hover { opacity: 0.85; }
 
-    /* ─── Empty state ─── */
+    /* â”€â”€â”€ Empty state â”€â”€â”€ */
     .empty-state {
       padding: 60px 24px; text-align: center;
     }
@@ -372,10 +373,10 @@ if ($role === 'student') {
     .empty-title { font-size: 14px; font-weight: 500; margin-bottom: 4px; }
     .empty-sub   { font-size: 12px; color: var(--text3); }
 
-    /* ─── Load more ─── */
+    /* â”€â”€â”€ Load more â”€â”€â”€ */
     .load-more-row { padding: 14px 20px; border-top: 0.5px solid var(--border); text-align: center; }
 
-    /* ─── Detail Modal ─── */
+    /* â”€â”€â”€ Detail Modal â”€â”€â”€ */
     .modal-bg {
       position: fixed; inset: 0;
       background: rgba(0,0,0,0.32); z-index: 200;
@@ -428,7 +429,7 @@ if ($role === 'student') {
       position: sticky; bottom: 0; background: var(--surface);
     }
 
-    /* ─── Toast ─── */
+    /* â”€â”€â”€ Toast â”€â”€â”€ */
     .toast {
       position: fixed; bottom: 20px; right: 20px;
       background: var(--surface); border: 0.5px solid var(--border);
@@ -442,7 +443,7 @@ if ($role === 'student') {
 </head>
 <body>
 
-<!-- ═══ NAVBAR ═══ -->
+<!-- â•â•â• NAVBAR â•â•â• -->
 <nav class="navbar">
   <div class="logo">TIPeed</div>
   <div class="nav-links">
@@ -457,7 +458,7 @@ if ($role === 'student') {
   <div class="nav-right">
     <div class="search">
       <i class="fas fa-search"></i>
-      <input type="text" placeholder="Search topics…">
+      <input type="text" placeholder="Search topicsâ€¦">
     </div>
     <button class="icon-btn" id="darkToggle" title="Toggle dark mode">
       <i class="fas fa-moon" id="darkIcon"></i>
@@ -465,7 +466,7 @@ if ($role === 'student') {
   </div>
 </nav>
 
-<!-- ═══ LAYOUT ═══ -->
+<!-- â•â•â• LAYOUT â•â•â• -->
 <div class="layout">
 
   <!-- SIDEBAR -->
@@ -506,7 +507,7 @@ if ($role === 'student') {
 
     <!-- Header -->
     <div class="page-header">
-      <div class="page-eyebrow">Admin · Community Management</div>
+      <div class="page-eyebrow">Admin Â· Community Management</div>
       <div class="page-title-row">
         <div class="page-title">Community Approvals</div>
         <a href="<?= $homePage ?>" class="back-link">
@@ -518,19 +519,19 @@ if ($role === 'student') {
     <!-- Stats -->
     <div class="stats-strip">
       <div class="stat-card">
-        <div class="stat-num" id="totalCount">—</div>
+        <div class="stat-num" id="totalCount">â€”</div>
         <div class="stat-label">Total</div>
       </div>
       <div class="stat-card">
-        <div class="stat-num gold" id="pendingCount">—</div>
+        <div class="stat-num gold" id="pendingCount">â€”</div>
         <div class="stat-label">Pending</div>
       </div>
       <div class="stat-card">
-        <div class="stat-num green" id="approvedCount">—</div>
+        <div class="stat-num green" id="approvedCount">â€”</div>
         <div class="stat-label">Approved</div>
       </div>
       <div class="stat-card">
-        <div class="stat-num red" id="rejectedCount">—</div>
+        <div class="stat-num red" id="rejectedCount">â€”</div>
         <div class="stat-label">Rejected</div>
       </div>
     </div>
@@ -556,7 +557,7 @@ if ($role === 'student') {
   </main>
 </div><!-- /.layout -->
 
-<!-- ═══ DETAIL MODAL ═══ -->
+<!-- â•â•â• DETAIL MODAL â•â•â• -->
 <div class="modal-bg" id="detailModal">
   <div class="modal">
     <div class="modal-header">
@@ -568,14 +569,14 @@ if ($role === 'student') {
   </div>
 </div>
 
-<!-- ═══ TOAST ═══ -->
+<!-- â•â•â• TOAST â•â•â• -->
 <div class="toast" id="toast">
   <i id="toastIcon" class="fas fa-check-circle" style="color:var(--green-text)"></i>
   <span id="toastMsg">Done.</span>
 </div>
 
 <script>
-// ── Dark mode ──
+// â”€â”€ Dark mode â”€â”€
 const darkToggle = document.getElementById('darkToggle');
 const darkIcon   = document.getElementById('darkIcon');
 let dark = localStorage.getItem('tipeed_dark') === '1';
@@ -590,7 +591,7 @@ darkToggle.addEventListener('click', () => {
   applyDark();
 });
 
-// ── Toast ──
+// â”€â”€ Toast â”€â”€
 function showToast(msg, type) {
   const t  = document.getElementById('toast');
   const ti = document.getElementById('toastIcon');
@@ -609,12 +610,12 @@ function showToast(msg, type) {
   setTimeout(() => t.classList.remove('show'), 3000);
 }
 
-// ── State ──
+// â”€â”€ State â”€â”€
 let allApprovals = [];
 let currentFilter = 'all';
 let currentModalId = null;
 
-// ── Init ──
+// â”€â”€ Init â”€â”€
 async function init() {
   await loadApprovals();
   bindFilters();
@@ -638,7 +639,7 @@ async function loadApprovals() {
   updateStats();
 }
 
-// ── Render ──
+// â”€â”€ Render â”€â”€
 function getFiltered() {
   if (currentFilter === 'all') return allApprovals;
   return allApprovals.filter(a => a.status === currentFilter);
@@ -687,8 +688,8 @@ function render() {
           <div class="item-preview-name">${a.name}</div>
           <div class="item-preview-desc">${a.description || 'No description provided.'}</div>
           <div class="item-preview-meta">
-            <span><i class="fas fa-tag" style="margin-right:4px"></i>${a.category || '—'}</span>
-            <span><i class="fas fa-lock" style="margin-right:4px"></i>${a.privacy || '—'}</span>
+            <span><i class="fas fa-tag" style="margin-right:4px"></i>${a.category || 'â€”'}</span>
+            <span><i class="fas fa-lock" style="margin-right:4px"></i>${a.privacy || 'â€”'}</span>
           </div>
         </div>
 
@@ -712,13 +713,13 @@ function render() {
       </div>
     </div>`).join('');
 
-  // Click row → open modal
+  // Click row â†’ open modal
   list.querySelectorAll('.approval-item').forEach(el => {
     el.addEventListener('click', () => openModal(parseInt(el.dataset.id)));
   });
 }
 
-// ── Stats ──
+// â”€â”€ Stats â”€â”€
 function updateStats() {
   const t = allApprovals.length;
   const p = allApprovals.filter(a => a.status === 'pending').length;
@@ -730,7 +731,7 @@ function updateStats() {
   document.getElementById('rejectedCount').textContent = r;
 }
 
-// ── Filters ──
+// â”€â”€ Filters â”€â”€
 function bindFilters() {
   document.querySelectorAll('.filter-btn').forEach(btn => {
     btn.addEventListener('click', () => {
@@ -742,7 +743,7 @@ function bindFilters() {
   });
 }
 
-// ── Action (approve / reject) ──
+// â”€â”€ Action (approve / reject) â”€â”€
 async function handleAction(id, action) {
   const approval = allApprovals.find(a => a.id === id);
   if (!approval) return;
@@ -769,17 +770,17 @@ async function handleAction(id, action) {
       showToast(data.message || 'Something went wrong.', 'err');
     }
   } catch (e) {
-    showToast('Server error — please try again.', 'err');
+    showToast('Server error â€” please try again.', 'err');
   }
 }
 
-// ── Modal ──
+// â”€â”€ Modal â”€â”€
 function openModal(id) {
   const a = allApprovals.find(x => x.id === id);
   if (!a) return;
   currentModalId = id;
 
-  document.getElementById('modalTitle').textContent = `"${a.name}" — Details`;
+  document.getElementById('modalTitle').textContent = `"${a.name}" â€” Details`;
 
   document.getElementById('modalBody').innerHTML = `
     <div class="user-row" style="margin-bottom:14px">
@@ -792,8 +793,8 @@ function openModal(id) {
     <div class="detail-row"><div class="detail-key">Community ID</div><div class="detail-val"><span style="font-family:var(--mono)">#COM-${a.communityId || a.id}</span></div></div>
     <div class="detail-row"><div class="detail-key">Status</div><div class="detail-val">${statusBadge(a.status)}</div></div>
     <div class="detail-row"><div class="detail-key">Submitted</div><div class="detail-val" style="font-family:var(--mono);font-size:12px">${a.timestamp}</div></div>
-    <div class="detail-row"><div class="detail-key">Category</div><div class="detail-val">${a.category || '—'}</div></div>
-    <div class="detail-row"><div class="detail-key">Privacy</div><div class="detail-val">${a.privacy || '—'}</div></div>
+    <div class="detail-row"><div class="detail-key">Category</div><div class="detail-val">${a.category || 'â€”'}</div></div>
+    <div class="detail-row"><div class="detail-key">Privacy</div><div class="detail-val">${a.privacy || 'â€”'}</div></div>
     ${a.reviewedBy ? `<div class="detail-row"><div class="detail-key">Reviewed by</div><div class="detail-val">${a.reviewedBy}</div></div>` : ''}
     ${a.reviewDate  ? `<div class="detail-row"><div class="detail-key">Review date</div><div class="detail-val" style="font-family:var(--mono);font-size:12px">${a.reviewDate}</div></div>` : ''}
     <div class="content-box" style="margin-top:14px"><strong>Community Name</strong>${a.name}</div>

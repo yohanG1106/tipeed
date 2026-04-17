@@ -1,7 +1,8 @@
-<?php
+﻿<?php
 header("Cache-Control: no-cache, no-store, must-revalidate");
 header("Pragma: no-cache");
 header("Expires: 0");
+include "db_connect.php";
 session_start();
 require 'db_connect.php';
 
@@ -70,18 +71,18 @@ $catClass = [
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Community — TIPeed</title>
+  <title>Community â€” TIPeed</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
-    /* ─── Reset ─── */
+    /* â”€â”€â”€ Reset â”€â”€â”€ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     a { color: inherit; text-decoration: none; }
     button { font-family: var(--font); cursor: pointer; }
 
-    /* ─── Tokens ─── */
+    /* â”€â”€â”€ Tokens â”€â”€â”€ */
     :root {
       --bg:        #f7f6f3;
       --surface:   #ffffff;
@@ -136,7 +137,7 @@ $catClass = [
       --coral-bg:  #2a1614;  --coral-text:#fb923c;
     }
 
-    /* ─── Base ─── */
+    /* â”€â”€â”€ Base â”€â”€â”€ */
     body {
       font-family: var(--font);
       background: var(--bg);
@@ -147,7 +148,7 @@ $catClass = [
       overflow: hidden;
     }
 
-    /* ─── Navbar ─── */
+    /* â”€â”€â”€ Navbar â”€â”€â”€ */
     .navbar {
       display: flex; align-items: center; gap: 4px;
       padding: 0 24px; height: 52px;
@@ -183,7 +184,7 @@ $catClass = [
     }
     .icon-btn:hover { background: var(--tag-bg); color: var(--text); }
 
-    /* ─── Layout ─── */
+    /* â”€â”€â”€ Layout â”€â”€â”€ */
     .layout {
       display: grid;
       grid-template-columns: 220px 1fr;
@@ -191,7 +192,7 @@ $catClass = [
       overflow: hidden;
     }
 
-    /* ─── Sidebar ─── */
+    /* â”€â”€â”€ Sidebar â”€â”€â”€ */
     .sidebar {
       background: var(--surface);
       border-right: 0.5px solid var(--border);
@@ -236,12 +237,12 @@ $catClass = [
     }
     .sidebar-bottom a:hover { color: var(--red-text); }
 
-    /* ─── Main ─── */
+    /* â”€â”€â”€ Main â”€â”€â”€ */
     .main { overflow-y: auto; padding: 28px 32px; }
     .main::-webkit-scrollbar { width: 4px; }
     .main::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
 
-    /* ─── Page header ─── */
+    /* â”€â”€â”€ Page header â”€â”€â”€ */
     .page-header { margin-bottom: 24px; }
     .page-eyebrow {
       font-size: 11px; font-weight: 500; color: var(--gold-text);
@@ -254,7 +255,7 @@ $catClass = [
     }
     .page-title { font-size: 20px; font-weight: 500; letter-spacing: -0.4px; }
 
-    /* ─── Filter + search bar ─── */
+    /* â”€â”€â”€ Filter + search bar â”€â”€â”€ */
     .toolbar {
       display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
       margin-bottom: 24px;
@@ -286,14 +287,14 @@ $catClass = [
     }
     .toolbar-search input::placeholder { color: var(--text3); }
 
-    /* ─── Community grid ─── */
+    /* â”€â”€â”€ Community grid â”€â”€â”€ */
     .comm-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(272px, 1fr));
       gap: 16px;
     }
 
-    /* ─── Community card ─── */
+    /* â”€â”€â”€ Community card â”€â”€â”€ */
     .comm-card {
       background: var(--surface);
       border: 0.5px solid var(--border);
@@ -436,7 +437,7 @@ $catClass = [
     .btn.gold:hover { background: var(--gold-dark); border-color: var(--gold-dark); }
     .btn i { font-size: 11px; }
 
-    /* ─── Floating create btn ─── */
+    /* â”€â”€â”€ Floating create btn â”€â”€â”€ */
     .fab {
       position: fixed; bottom: 28px; right: 28px;
       width: 46px; height: 46px;
@@ -449,7 +450,7 @@ $catClass = [
     }
     .fab:hover { opacity: 0.85; transform: scale(1.06); }
 
-    /* ─── Modal ─── */
+    /* â”€â”€â”€ Modal â”€â”€â”€ */
     .modal-bg {
       position: fixed; inset: 0;
       background: rgba(0,0,0,0.32); z-index: 200;
@@ -514,7 +515,7 @@ $catClass = [
     .form-msg.ok  { background: var(--green-bg); color: var(--green-text); display: block; }
     .form-msg.err { background: var(--red-bg);   color: var(--red-text);   display: block; }
 
-    /* ─── Empty state ─── */
+    /* â”€â”€â”€ Empty state â”€â”€â”€ */
     .empty-state {
       grid-column: 1 / -1;
       padding: 60px 24px; text-align: center;
@@ -528,7 +529,7 @@ $catClass = [
     .empty-title { font-size: 14px; font-weight: 500; margin-bottom: 4px; }
     .empty-sub   { font-size: 12px; color: var(--text3); }
 
-    /* ─── Toast ─── */
+    /* â”€â”€â”€ Toast â”€â”€â”€ */
     .toast {
       position: fixed; bottom: 20px; right: 20px;
       background: var(--surface); border: 0.5px solid var(--border);
@@ -542,7 +543,7 @@ $catClass = [
 </head>
 <body>
 
-<!-- ═══ NAVBAR ═══ -->
+<!-- â•â•â• NAVBAR â•â•â• -->
 <nav class="navbar">
   <div class="logo">TIPeed</div>
   <div class="nav-links">
@@ -557,7 +558,7 @@ $catClass = [
   <div class="nav-right">
     <div class="search">
       <i class="fas fa-search"></i>
-      <input type="text" placeholder="Search topics…">
+      <input type="text" placeholder="Search topicsâ€¦">
     </div>
     <button class="icon-btn" id="darkToggle" title="Toggle dark mode">
       <i class="fas fa-moon" id="darkIcon"></i>
@@ -565,7 +566,7 @@ $catClass = [
   </div>
 </nav>
 
-<!-- ═══ LAYOUT ═══ -->
+<!-- â•â•â• LAYOUT â•â•â• -->
 <div class="layout">
 
   <!-- Sidebar -->
@@ -622,7 +623,7 @@ $catClass = [
       </div>
       <div class="toolbar-search">
         <i class="fas fa-search"></i>
-        <input type="text" placeholder="Search communities…" id="commSearch">
+        <input type="text" placeholder="Search communitiesâ€¦" id="commSearch">
       </div>
     </div>
 
@@ -721,7 +722,7 @@ $catClass = [
   <i class="fas fa-plus"></i>
 </button>
 
-<!-- ═══ CREATE MODAL ═══ -->
+<!-- â•â•â• CREATE MODAL â•â•â• -->
 <div class="modal-bg" id="createModal">
   <div class="modal">
     <div class="modal-header">
@@ -745,7 +746,7 @@ $catClass = [
           <div class="form-group">
             <label class="form-label" for="commCat">Category <span class="req">*</span></label>
             <select id="commCat" name="category" class="form-select" required>
-              <option value="">Select…</option>
+              <option value="">Selectâ€¦</option>
               <option>Education</option><option>Technology</option><option>Gaming</option>
               <option>Sports</option><option>Entertainment</option><option>Health</option><option>Other</option>
             </select>
@@ -771,7 +772,7 @@ $catClass = [
   </div>
 </div>
 
-<!-- ═══ PRIVATE ACCESS MODAL ═══ -->
+<!-- â•â•â• PRIVATE ACCESS MODAL â•â•â• -->
 <div class="modal-bg" id="privateModal">
   <div class="modal">
     <div class="modal-header">
@@ -787,7 +788,7 @@ $catClass = [
         <div id="privateMsg" class="form-msg"></div>
         <div class="form-group">
           <label class="form-label" for="privateCode">Access Code <span class="req">*</span></label>
-          <input type="text" id="privateCode" name="access_code" class="form-input" placeholder="Enter the access code…" required>
+          <input type="text" id="privateCode" name="access_code" class="form-input" placeholder="Enter the access codeâ€¦" required>
         </div>
       </form>
     </div>
@@ -805,7 +806,7 @@ $catClass = [
 </div>
 
 <script>
-// ── Dark mode ──
+// â”€â”€ Dark mode â”€â”€
 const darkToggle = document.getElementById('darkToggle');
 const darkIcon   = document.getElementById('darkIcon');
 let dark = localStorage.getItem('tipeed_dark') === '1';
@@ -820,7 +821,7 @@ darkToggle.addEventListener('click', () => {
   applyDark();
 });
 
-// ── Toast ──
+// â”€â”€ Toast â”€â”€
 function showToast(msg, type) {
   const t  = document.getElementById('toast');
   const ti = document.getElementById('toastIcon');
@@ -831,7 +832,7 @@ function showToast(msg, type) {
   setTimeout(() => t.classList.remove('show'), 3000);
 }
 
-// ── Modals ──
+// â”€â”€ Modals â”€â”€
 function openModal(id)  { document.getElementById(id).classList.add('open'); }
 function closeModal(id) { document.getElementById(id).classList.remove('open'); }
 
@@ -845,13 +846,13 @@ document.querySelectorAll('.modal-bg').forEach(bg => {
 document.getElementById('openCreateModal').addEventListener('click', () => openModal('createModal'));
 document.getElementById('fabCreate').addEventListener('click', () => openModal('createModal'));
 
-// ── Privacy toggle ──
+// â”€â”€ Privacy toggle â”€â”€
 document.getElementById('commPrivacy').addEventListener('change', function () {
   document.getElementById('accessCodeGroup').style.display = this.value === 'Private' ? '' : 'none';
   document.getElementById('commAccessCode').required = (this.value === 'Private');
 });
 
-// ── Create community ──
+// â”€â”€ Create community â”€â”€
 document.getElementById('submitCreate').addEventListener('click', () => {
   const form = document.getElementById('communityForm');
   if (!form.checkValidity()) { form.reportValidity(); return; }
@@ -869,10 +870,10 @@ document.getElementById('submitCreate').addEventListener('click', () => {
         showToast(data.message || 'Something went wrong.', 'err');
       }
     })
-    .catch(() => showToast('Server error — please try again.', 'err'));
+    .catch(() => showToast('Server error â€” please try again.', 'err'));
 });
 
-// ── Private join ──
+// â”€â”€ Private join â”€â”€
 function openPrivate(id) {
   document.getElementById('privateCommunityId').value = id;
   document.getElementById('privateCode').value = '';
@@ -901,12 +902,12 @@ document.getElementById('submitPrivate').addEventListener('click', () => {
     })
     .catch(() => {
       const msg = document.getElementById('privateMsg');
-      msg.textContent = 'Server error — please try again.';
+      msg.textContent = 'Server error â€” please try again.';
       msg.className = 'form-msg err';
     });
 });
 
-// ── Admin options menu ──
+// â”€â”€ Admin options menu â”€â”€
 function toggleOpts(btn) {
   const menu = btn.nextElementSibling;
   document.querySelectorAll('.comm-options-menu.open').forEach(m => { if (m !== menu) m.classList.remove('open'); });
@@ -918,7 +919,7 @@ document.addEventListener('click', e => {
   }
 });
 
-// ── Filter ──
+// â”€â”€ Filter â”€â”€
 const filterBtns = document.querySelectorAll('.filter-btn');
 filterBtns.forEach(btn => {
   btn.addEventListener('click', () => {

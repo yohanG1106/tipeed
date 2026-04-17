@@ -1,4 +1,5 @@
-<?php
+﻿<?php
+include "db_connect.php";
 session_start();
 
 if (!isset($_SESSION['userid']) || $_SESSION['role'] !== 'admin') {
@@ -43,18 +44,18 @@ if ($role === 'student') {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Register Faculty — TIPeed</title>
+  <title>Register Faculty â€” TIPeed</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
-    /* ─── Reset ─── */
+    /* â”€â”€â”€ Reset â”€â”€â”€ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     a { color: inherit; text-decoration: none; }
     button { font-family: var(--font); cursor: pointer; }
 
-    /* ─── Tokens ─── */
+    /* â”€â”€â”€ Tokens â”€â”€â”€ */
     :root {
       --bg:        #f7f6f3;
       --surface:   #ffffff;
@@ -100,7 +101,7 @@ if ($role === 'student') {
       --green-bg:  #0f1f16;  --green-text: #52c487;
     }
 
-    /* ─── Base ─── */
+    /* â”€â”€â”€ Base â”€â”€â”€ */
     body {
       font-family: var(--font);
       background: var(--bg);
@@ -111,7 +112,7 @@ if ($role === 'student') {
       overflow: hidden;
     }
 
-    /* ─── Navbar ─── */
+    /* â”€â”€â”€ Navbar â”€â”€â”€ */
     .navbar {
       display: flex;
       align-items: center;
@@ -160,7 +161,7 @@ if ($role === 'student') {
     }
     .icon-btn:hover { background: var(--tag-bg); color: var(--text); }
 
-    /* ─── Layout ─── */
+    /* â”€â”€â”€ Layout â”€â”€â”€ */
     .layout {
       display: grid;
       grid-template-columns: 220px 1fr;
@@ -168,7 +169,7 @@ if ($role === 'student') {
       overflow: hidden;
     }
 
-    /* ─── Sidebar ─── */
+    /* â”€â”€â”€ Sidebar â”€â”€â”€ */
     .sidebar {
       background: var(--surface);
       border-right: 0.5px solid var(--border);
@@ -221,10 +222,10 @@ if ($role === 'student') {
     }
     .sidebar-bottom a:hover { color: var(--red-text); }
 
-    /* ─── Main ─── */
+    /* â”€â”€â”€ Main â”€â”€â”€ */
     .main { overflow-y: auto; padding: 28px 32px; }
 
-    /* ─── Page header ─── */
+    /* â”€â”€â”€ Page header â”€â”€â”€ */
     .page-header { margin-bottom: 24px; }
     .page-eyebrow {
       font-size: 11px; font-weight: 500; color: var(--gold-text);
@@ -234,7 +235,7 @@ if ($role === 'student') {
     .page-title { font-size: 20px; font-weight: 500; letter-spacing: -0.4px; }
     .page-sub   { font-size: 13px; color: var(--text3); margin-top: 3px; }
 
-    /* ─── Form card ─── */
+    /* â”€â”€â”€ Form card â”€â”€â”€ */
     .form-card {
       background: var(--surface);
       border: 0.5px solid var(--border);
@@ -257,7 +258,7 @@ if ($role === 'student') {
     .form-card-sub   { font-size: 11px; color: var(--text3); margin-top: 1px; }
     .form-body { padding: 22px; }
 
-    /* ─── Field groups ─── */
+    /* â”€â”€â”€ Field groups â”€â”€â”€ */
     .field-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -291,7 +292,7 @@ if ($role === 'student') {
     .field-input::placeholder { color: var(--text3); }
     .field-hint { font-size: 11px; color: var(--text3); }
 
-    /* ─── Divider ─── */
+    /* â”€â”€â”€ Divider â”€â”€â”€ */
     .section-divider {
       border: none;
       border-top: 0.5px solid var(--border);
@@ -303,7 +304,7 @@ if ($role === 'student') {
       margin-bottom: 14px; font-family: var(--mono);
     }
 
-    /* ─── Course chips ─── */
+    /* â”€â”€â”€ Course chips â”€â”€â”€ */
     .course-chips {
       display: flex; flex-wrap: wrap; gap: 6px;
       margin-top: 10px; min-height: 32px;
@@ -326,7 +327,7 @@ if ($role === 'student') {
     .chip-remove:hover { opacity: 1; }
     .chip-empty { font-size: 12px; color: var(--text3); padding: 4px 0; }
 
-    /* ─── Checkbox setting ─── */
+    /* â”€â”€â”€ Checkbox setting â”€â”€â”€ */
     .setting-row { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
     .setting-row input[type="checkbox"] {
       width: 16px; height: 16px;
@@ -336,7 +337,7 @@ if ($role === 'student') {
     .setting-row label { font-size: 13px; color: var(--text2); cursor: pointer; }
     .setting-row .setting-desc { font-size: 11px; color: var(--text3); margin-top: 1px; }
 
-    /* ─── Actions ─── */
+    /* â”€â”€â”€ Actions â”€â”€â”€ */
     .form-actions {
       display: flex; gap: 8px; justify-content: flex-end;
       padding-top: 20px;
@@ -366,7 +367,7 @@ if ($role === 'student') {
     }
     .btn.gold:hover { background: var(--gold-dark); border-color: var(--gold-dark); }
 
-    /* ─── Success modal ─── */
+    /* â”€â”€â”€ Success modal â”€â”€â”€ */
     .modal-bg {
       position: fixed; inset: 0;
       background: rgba(0,0,0,0.32);
@@ -398,7 +399,7 @@ if ($role === 'student') {
     .modal-msg   { font-size: 13px; color: var(--text2); line-height: 1.6; }
     .modal-actions { margin-top: 22px; }
 
-    /* ─── Confetti ─── */
+    /* â”€â”€â”€ Confetti â”€â”€â”€ */
     .confetti-wrap {
       position: fixed; inset: 0; pointer-events: none; z-index: 201;
     }
@@ -413,7 +414,7 @@ if ($role === 'student') {
       100% { opacity:0; transform: translateY(110vh) rotate(400deg); }
     }
 
-    /* ─── Toast ─── */
+    /* â”€â”€â”€ Toast â”€â”€â”€ */
     .toast {
       position: fixed; bottom: 20px; right: 20px;
       background: var(--surface);
@@ -431,7 +432,7 @@ if ($role === 'student') {
 </head>
 <body>
 
-<!-- ═══ NAVBAR ═══ -->
+<!-- â•â•â• NAVBAR â•â•â• -->
 <nav class="navbar">
   <div class="logo">TIPeed</div>
   <div class="nav-links">
@@ -446,7 +447,7 @@ if ($role === 'student') {
   <div class="nav-right">
     <div class="search">
       <i class="fas fa-search"></i>
-      <input type="text" placeholder="Search topics…">
+      <input type="text" placeholder="Search topicsâ€¦">
     </div>
     <button class="icon-btn" id="darkToggle" title="Toggle dark mode">
       <i class="fas fa-moon" id="darkIcon"></i>
@@ -454,7 +455,7 @@ if ($role === 'student') {
   </div>
 </nav>
 
-<!-- ═══ LAYOUT ═══ -->
+<!-- â•â•â• LAYOUT â•â•â• -->
 <div class="layout">
 
   <!-- SIDEBAR -->
@@ -493,7 +494,7 @@ if ($role === 'student') {
   <main class="main">
 
     <div class="page-header">
-      <div class="page-eyebrow">Admin · Faculty Management</div>
+      <div class="page-eyebrow">Admin Â· Faculty Management</div>
       <div class="page-title">Register Faculty Account</div>
       <div class="page-sub">Create a new faculty account and assign courses.</div>
     </div>
@@ -539,7 +540,7 @@ if ($role === 'student') {
           <div class="field-group">
             <label class="field-label" for="courseCode">Add Course <span class="req">*</span></label>
             <select id="courseCode" class="field-select">
-              <option value="">Loading CCS Courses…</option>
+              <option value="">Loading CCS Coursesâ€¦</option>
             </select>
             <div class="field-hint" style="margin-top:6px">Select one or more courses to assign to this faculty.</div>
           </div>
@@ -573,7 +574,7 @@ if ($role === 'student') {
   </main>
 </div><!-- /.layout -->
 
-<!-- ═══ SUCCESS MODAL ═══ -->
+<!-- â•â•â• SUCCESS MODAL â•â•â• -->
 <div class="modal-bg" id="successModal">
   <div class="modal">
     <div class="modal-icon"><i class="fas fa-check"></i></div>
@@ -585,17 +586,17 @@ if ($role === 'student') {
   </div>
 </div>
 
-<!-- ═══ CONFETTI ═══ -->
+<!-- â•â•â• CONFETTI â•â•â• -->
 <div class="confetti-wrap" id="confettiWrap"></div>
 
-<!-- ═══ TOAST ═══ -->
+<!-- â•â•â• TOAST â•â•â• -->
 <div class="toast" id="toast">
   <i class="fas fa-exclamation-circle" style="color:var(--red-text)"></i>
   <span id="toastMsg">Please fill in all required fields.</span>
 </div>
 
 <script>
-// ── Dark mode ──
+// â”€â”€ Dark mode â”€â”€
 const darkToggle = document.getElementById('darkToggle');
 const darkIcon   = document.getElementById('darkIcon');
 let dark = localStorage.getItem('tipeed_dark') === '1';
@@ -610,7 +611,7 @@ darkToggle.addEventListener('click', () => {
   applyDark();
 });
 
-// ── Toast ──
+// â”€â”€ Toast â”€â”€
 function showToast(msg, type) {
   const t  = document.getElementById('toast');
   const tm = document.getElementById('toastMsg');
@@ -621,7 +622,7 @@ function showToast(msg, type) {
   setTimeout(() => t.classList.remove('show'), 3000);
 }
 
-// ── Course chips ──
+// â”€â”€ Course chips â”€â”€
 const courseSelect = document.getElementById('courseCode');
 const chipsDisplay = document.getElementById('selectedCoursesDisplay');
 let selectedCourses = [];
@@ -654,15 +655,15 @@ function renderChips() {
   });
 }
 
-// ── Load courses ──
+// â”€â”€ Load courses â”€â”€
 fetch('get_course.php')
   .then(r => r.json())
   .then(data => {
-    courseSelect.innerHTML = '<option value="">Select a CCS course…</option>';
+    courseSelect.innerHTML = '<option value="">Select a CCS courseâ€¦</option>';
     data.forEach(c => {
       const o = document.createElement('option');
       o.value = c.course_id;
-      o.textContent = `${c.course_code} — ${c.course_name}`;
+      o.textContent = `${c.course_code} â€” ${c.course_name}`;
       courseSelect.appendChild(o);
     });
   })
@@ -670,7 +671,7 @@ fetch('get_course.php')
     courseSelect.innerHTML = '<option value="">Failed to load courses</option>';
   });
 
-// ── Confetti ──
+// â”€â”€ Confetti â”€â”€
 function launchConfetti() {
   const wrap = document.getElementById('confettiWrap');
   wrap.innerHTML = '';
@@ -688,7 +689,7 @@ function launchConfetti() {
   setTimeout(() => { wrap.innerHTML = ''; }, 6000);
 }
 
-// ── Save ──
+// â”€â”€ Save â”€â”€
 const saveBtn   = document.getElementById('saveBtn');
 const modal     = document.getElementById('successModal');
 const successMsg = document.getElementById('successMessage');
@@ -708,7 +709,7 @@ saveBtn.addEventListener('click', () => {
   }
 
   saveBtn.disabled = true;
-  saveBtn.innerHTML = '<i class="fas fa-circle-notch fa-spin" style="font-size:11px;margin-right:4px"></i>Creating…';
+  saveBtn.innerHTML = '<i class="fas fa-circle-notch fa-spin" style="font-size:11px;margin-right:4px"></i>Creatingâ€¦';
 
   fetch('create_faculty.php', {
     method: 'POST',
@@ -735,7 +736,7 @@ saveBtn.addEventListener('click', () => {
     .catch(() => {
       saveBtn.disabled = false;
       saveBtn.innerHTML = '<i class="fas fa-plus" style="font-size:11px;margin-right:4px"></i>Create Account';
-      showToast('Server error — please try again.', 'err');
+      showToast('Server error â€” please try again.', 'err');
     });
 });
 
