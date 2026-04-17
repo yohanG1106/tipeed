@@ -1,4 +1,8 @@
 <?php
+
+if (defined('DB_CONNECTED')) return;
+define('DB_CONNECTED', true);
+
 $servername = getenv('MYSQLHOST')     ?: 'localhost';
 $username   = getenv('MYSQLUSER')     ?: 'root';
 $password   = getenv('MYSQLPASSWORD') ?: '';
