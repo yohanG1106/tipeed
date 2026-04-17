@@ -1,6 +1,6 @@
-<?php
-session_start();
-include "db_connect.php"; // mysqli connection
+﻿<?php
+include "db_connect.php";
+session_start(); // mysqli connection
 include 'log_action.php';
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {

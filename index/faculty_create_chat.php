@@ -1,6 +1,6 @@
-<?php
-session_start();
+﻿<?php
 include "db_connect.php";
+session_start();
 if (!isset($_SESSION['userid'])) { header("Location: auth.php"); exit; }
 $currentUserRole=isset($_SESSION['role'])?$_SESSION['role']:'';
 $homePage=$currentUserRole==='admin'?'admin_home.php':($currentUserRole==='faculty'?'teacher_home.php':'student_home.php');

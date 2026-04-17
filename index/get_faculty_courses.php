@@ -1,6 +1,6 @@
-<?php
-session_start();
+﻿<?php
 include "db_connect.php";
+session_start();
 
 if (!isset($_SESSION['userid']) || $_SESSION['role'] !== 'faculty') {
     echo json_encode(['status' => 'error', 'message' => 'Unauthorized access']);

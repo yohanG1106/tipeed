@@ -1,6 +1,6 @@
-<?php
-session_start();
-include "db_connect.php"; // your mysqli connection
+﻿<?php
+include "db_connect.php";
+session_start(); // your mysqli connection
 
 if (!isset($_SESSION['userid']) || $_SESSION['role'] !== 'admin') {
     http_response_code(403);

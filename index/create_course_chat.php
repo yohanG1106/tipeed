@@ -1,6 +1,6 @@
-<?php
-session_start();
+﻿<?php
 include "db_connect.php";
+session_start();
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $input = json_decode(file_get_contents('php://input'), true);

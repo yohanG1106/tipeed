@@ -1,6 +1,6 @@
-<?php
-session_start();
+﻿<?php
 include "db_connect.php";
+session_start();
 
 $stmt = $conn->prepare("
     SELECT a.announcement_id, a.title, a.content, a.type, a.date, u.first_name, u.last_name

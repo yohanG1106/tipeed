@@ -1,6 +1,6 @@
-<?php
-session_start();
-include "db_connect.php"; // database connection
+﻿<?php
+include "db_connect.php";
+session_start(); // database connection
 
 if (!isset($_SESSION['userid'])) {
     header("Location: auth.php");

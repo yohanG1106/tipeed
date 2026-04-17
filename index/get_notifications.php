@@ -1,6 +1,6 @@
-<?php
-session_start();
+﻿<?php
 include "db_connect.php";
+session_start();
 
 $user_id = $_SESSION['userid'] ?? null;
 if (!$user_id) {
