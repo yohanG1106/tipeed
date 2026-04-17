@@ -5,10 +5,7 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install mysqli pdo pdo_mysql \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-RUN a2enmod rewrite \
-    && a2dismod mpm_event \
-    && a2enmod mpm_prefork \
-    && a2enmod php8.2
+RUN a2enmod rewrite
 
 COPY . /var/www/html/
 COPY index/ /var/www/html/
@@ -20,3 +17,5 @@ RUN mkdir -p /var/www/html/uploads/chat_files \
     && chmod -R 775 /var/www/html/uploads
 
 EXPOSE 80
+
+CMD ["apache2-foreground"]
