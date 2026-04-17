@@ -548,26 +548,26 @@ header("Expires: 0");
       <?php endif; ?>
     });
 
-    // ── AJAX LOGIN ──
-    document.getElementById('loginFormElement').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const btn = document.getElementById('loginBtn');
-      btn.textContent = 'Signing in…';
-      btn.disabled = true;
+   // ── AJAX LOGIN ──
+document.getElementById('loginFormElement').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const btn = document.getElementById('loginBtn');
+  btn.textContent = 'Signing in…';
+  btn.disabled = true;
 
-      fetch('login.php', { method: 'POST', body: new FormData(this), credentials: 'include' })
-        .then(res => {
-          if (res.redirected) { window.location.href = res.url; return null; }
-          return res.text();
-        })
-        .then(data => {
-          if (!data) return;
-          if (data.includes('Invalid password'))      showNotif('Incorrect password. Please try again.', 'err');
-          else if (data.includes('No account found')) showNotif('No account found with that email.', 'err');
-        })
-        .catch(() => showNotif('Something went wrong. Please try again.', 'err'))
-        .finally(() => { btn.textContent = 'Sign In'; btn.disabled = false; });
-    });
+  fetch('login.php', { method: 'POST', body: new FormData(this), credentials: 'include' })
+    .then(res => {
+      if (res.redirected) { window.location.href = res.url; return null; }
+      return res.text();
+    })
+    .then(data => {
+      if (!data) return;
+      if (data.includes('Invalid password'))      showNotif('Incorrect password. Please try again.', 'err');
+      else if (data.includes('No account found')) showNotif('No account found with that email.', 'err');
+    })
+    .catch(() => showNotif('Something went wrong. Please try again.', 'err'))
+    .finally(() => { btn.textContent = 'Sign In'; btn.disabled = false; });
+});
   </script>
 </body>
 </html>
