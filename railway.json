@@ -1,6 +1,9 @@
-$json = '{"$schema":"https://railway.app/railway.schema.json","build":{"builder":"DOCKERFILE"},"deploy":{"startCommand":"php -S 0.0.0.0:8080 -t /var/www/html/index /var/www/html/router.php","restartPolicyType":"ON_FAILURE"}}'
-[System.IO.File]::WriteAllText("$PWD\railway.json", $json, [System.Text.Encoding]::ASCII)
-
-git add railway.json
-git commit -m "Use router for PHP server"
-git push
+{
+  "build": {
+    "builder": "DOCKERFILE"
+  },
+  "deploy": {
+    "startCommand": "php -S 0.0.0.0:8080 -t /var/www/html/index /var/www/html/router.php",
+    "restartPolicyType": "ON_FAILURE"
+  }
+}
