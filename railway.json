@@ -3,7 +3,6 @@
     "builder": "DOCKERFILE"
   },
   "deploy": {
-    "startCommand": "php -S 0.0.0.0:8080 -t /var/www/html/index /var/www/html/router.php",
     "restartPolicyType": "ON_FAILURE"
   }
 }
