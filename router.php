@@ -1,11 +1,7 @@
-﻿<?php
-// Debug: show what files exist
-echo '<pre>';
-echo 'DIR: ' . __DIR__ . '<br>';
-echo 'Files in DIR:<br>';
-foreach(scandir(__DIR__) as $f) echo $f . '<br>';
-echo 'Files in index:<br>';
-if(is_dir(__DIR__ . '/index')) {
-    foreach(scandir(__DIR__ . '/index') as $f) echo $f . '<br>';
+<?php
+$uri = urldecode(parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH));
+$file = __DIR__ . "/index" . $uri;
+if ($uri !== "/" && file_exists($file) && !is_dir($file)) {
+    return false;
 }
-echo '</pre>';
+require __DIR__ . "/index/auth.php";
