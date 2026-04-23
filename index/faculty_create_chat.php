@@ -118,7 +118,7 @@ else{$studentIDT=ucfirst(htmlspecialchars($role));}
       <a href="student_home.php">Thread</a>
       <a href="faculty_chats.php" class="active">Faculty</a>
       <?php endif; ?>
-      <a href="Community.php">Community</a>
+      <a href="community.php">Community</a>
     </nav>
     <div class="topbar-right">
       <button class="tb-btn" id="themeBtn"><i class="fas fa-moon"></i></button>
@@ -140,8 +140,8 @@ else{$studentIDT=ucfirst(htmlspecialchars($role));}
       <a href="<?= $homePage ?>" class="nav-item"><span class="nav-icon"><i class="fas fa-home"></i></span><span class="nav-label">Home</span></a>
       <div class="nav-section-label">Engage</div>
       <a href="chat_interface.php" class="nav-item"><span class="nav-icon"><i class="fas fa-comment-dots"></i></span><span class="nav-label">Course Chat</span></a>
-      <a href="CourseChat.php" class="nav-item"><span class="nav-icon"><i class="fas fa-comments"></i></span><span class="nav-label">Communities</span></a>
-      <a href="Community.php" class="nav-item"><span class="nav-icon"><i class="fas fa-users"></i></span><span class="nav-label">Community</span></a>
+      <a href="coursechat.php" class="nav-item"><span class="nav-icon"><i class="fas fa-comments"></i></span><span class="nav-label">Communities</span></a>
+      <a href="community.php" class="nav-item"><span class="nav-icon"><i class="fas fa-users"></i></span><span class="nav-label">Community</span></a>
       <?php if($currentUserRole==='admin'): ?><a href="admin_reg.php" class="nav-item"><span class="nav-icon"><i class="fas fa-user-plus"></i></span><span class="nav-label">Register</span></a><?php endif; ?>
       <div class="nav-section-label">Tools</div>
       <a href="calendar.php" class="nav-item"><span class="nav-icon"><i class="fas fa-calendar-alt"></i></span><span class="nav-label">Calendar</span></a>

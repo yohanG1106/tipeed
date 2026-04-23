@@ -357,7 +357,7 @@ $year_levels = ['','1st Year','2nd Year','3rd Year','4th Year','5th Year'];
     <a href="student_home.php">Threads</a>
     <a href="faculty_chats.php">Faculty</a>
     <?php endif; ?>
-    <a href="Community.php">Community</a>
+    <a href="community.php">Community</a>
     <a href="aboutus.php">About</a>
   </div>
   <div class="nav-right">
@@ -386,8 +386,8 @@ $year_levels = ['','1st Year','2nd Year','3rd Year','4th Year','5th Year'];
     <a href="profile.php" class="menu-item active"><i class="fas fa-user"></i> Profile</a>
     <a href="<?= $homePage ?>" class="menu-item"><i class="fas fa-house"></i> Home</a>
     <a href="chat_interface.php" class="menu-item"><i class="fas fa-comment-dots"></i> Course Chat</a>
-    <a href="CourseChat.php" class="menu-item"><i class="fas fa-comments"></i> Communities Chat</a>
-    <a href="Community.php" class="menu-item"><i class="fas fa-users"></i> Community</a>
+    <a href="coursechat.php" class="menu-item"><i class="fas fa-comments"></i> Communities Chat</a>
+    <a href="community.php" class="menu-item"><i class="fas fa-users"></i> Community</a>
     <?php if ($currentUserRole === 'admin'): ?>
     <a href="admin_reg.php" class="menu-item"><i class="fas fa-user-plus"></i> Register</a>
     <?php endif; ?>

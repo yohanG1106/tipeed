@@ -782,7 +782,7 @@ if ($role === 'student') {
       <a href="student_home.php">Thread</a>
       <a href="faculty_chats.php">Faculty</a>
       <?php endif; ?>
-      <a href="Community.php">Community</a>
+      <a href="community.php">Community</a>
       <a href="aboutus.php">About Us</a>
     </div>
     <div class="search-bar">
@@ -809,8 +809,8 @@ if ($role === 'student') {
         <a href="profile.php" class="menu-item"><div class="menu-icon"><i class="fas fa-user"></i></div><div class="menu-text">Profile</div></a>
         <a href="<?= $homePage ?>" class="menu-item"><div class="menu-icon"><i class="fas fa-home"></i></div><div class="menu-text">Home</div></a>
         <a href="chat_interface.php" class="menu-item"><div class="menu-icon"><i class="fas fa-comment-dots"></i></div><div class="menu-text">Course Chat</div></a>
-        <a href="CourseChat.php" class="menu-item"><div class="menu-icon"><i class="fas fa-comments"></i></div><div class="menu-text">Communities Chat</div></a>
-        <a href="Community.php" class="menu-item"><div class="menu-icon"><i class="fas fa-users"></i></div><div class="menu-text">Community</div></a>
+        <a href="coursechat.php" class="menu-item"><div class="menu-icon"><i class="fas fa-comments"></i></div><div class="menu-text">Communities Chat</div></a>
+        <a href="community.php" class="menu-item"><div class="menu-icon"><i class="fas fa-users"></i></div><div class="menu-text">Community</div></a>
         <?php if ($currentUserRole === 'admin'): ?>
         <a href="admin_reg.php" class="menu-item"><div class="menu-icon"><i class="fas fa-user-plus"></i></div><div class="menu-text">Register</div></a>
         <?php endif; ?>

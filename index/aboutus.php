@@ -388,7 +388,7 @@ $homePage = $currentUserRole === 'admin' ? 'admin_home.php' : ($currentUserRole 
     <a href="student_home.php">Threads</a>
     <a href="faculty_chats.php">Faculty</a>
     <?php endif; ?>
-    <a href="Community.php">Community</a>
+    <a href="community.php">Community</a>
     <a href="aboutus.php" class="active">About</a>
   </div>
   <div class="nav-right">
