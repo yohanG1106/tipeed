@@ -574,7 +574,7 @@ $currentUserRole = isset($_SESSION['role']) ? $_SESSION['role'] : '';
       <a href="student_home.php">Thread</a>
       <a href="faculty_chats.php">Faculty</a>
     <?php endif; ?>
-    <a href="Community.php">Community</a>
+    <a href="community.php">Community</a>
     <a href="aboutus.php">About Us</a>
   </div>
   <div class="nav-right">
@@ -611,8 +611,8 @@ $currentUserRole = isset($_SESSION['role']) ? $_SESSION['role'] : '';
     <a href="admin_home.php" class="menu-item active"><i class="fas fa-home"></i> Home</a>
     <a href="profile.php"    class="menu-item"><i class="fas fa-user"></i> Profile</a>
     <a href="chat_interface.php" class="menu-item"><i class="fas fa-comment-dots"></i> Course Chat</a>
-    <a href="CourseChat.php"     class="menu-item"><i class="fas fa-comments"></i> Communities Chat</a>
-    <a href="Community.php"      class="menu-item"><i class="fas fa-users"></i> Community</a>
+    <a href="coursechat.php"     class="menu-item"><i class="fas fa-comments"></i> Communities Chat</a>
+    <a href="community.php"      class="menu-item"><i class="fas fa-users"></i> Community</a>
 
     <div class="nav-section-label">Admin</div>
     <a href="admin_reg.php"  class="menu-item"><i class="fas fa-user-plus"></i> Register</a>
