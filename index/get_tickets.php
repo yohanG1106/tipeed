@@ -1,7 +1,6 @@
 <?php
 include "db_connect.php";
 session_start();
-include 'db_connect.php';
 
 if (!isset($_SESSION['userid'])) {
     echo json_encode(['error' => 'Not logged in']);

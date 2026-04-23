@@ -1,7 +1,6 @@
 <?php
 include "db_connect.php";
 session_start();
-include 'db_connect.php';
 
 if (!isset($_SESSION['userid']) || $_SESSION['role'] !== 'admin') {
     http_response_code(403);

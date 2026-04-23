@@ -1,7 +1,6 @@
 <?php
 include "db_connect.php";
 session_start();
-include 'db_connect.php';
 
 if (!isset($_GET['community_id'])) {
     echo json_encode([]);
